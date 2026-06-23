@@ -43,15 +43,20 @@
 
   <!-- Hero Section -->
   <header class="section hero" id="hero">
-    <div class="hero-content">
-      <h1 class="hero-title">Hi, I'm <span class="highlight">Arun Kumar Meda</span></h1>
-      <p class="hero-subtitle">
-        I build high-quality software & contribute to
-        <span class="animated-text" id="animated-text">Open Source</span>
-      </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary" id="btn-view-work">View My Work</a>
-        <a href="#contact" class="btn btn-secondary" id="btn-get-in-touch">Let's Connect</a>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <h1 class="hero-title">Hi, I'm <span class="highlight">Arun Kumar Meda</span></h1>
+        <p class="hero-subtitle">
+          I build high-quality software & contribute to
+          <span class="animated-text" id="animated-text">Open Source</span>
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary" id="btn-view-work">View My Work</a>
+          <a href="#contact" class="btn btn-secondary" id="btn-get-in-touch">Let's Connect</a>
+        </div>
+      </div>
+      <div class="hero-avatar-container">
+        <img src="" id="github-avatar" class="avatar-glow" alt="Arun Kumar Meda" style="display: none;">
       </div>
     </div>
   </header>
@@ -139,70 +144,27 @@
   <!-- Projects Section -->
   <section class="section projects" id="projects">
     <h2 class="section-title text-center">Featured Projects</h2>
-    <div class="projects-grid">
-      <!-- Project 1 -->
-      <div class="card project-card" id="project-card-first-contributions">
-        <div class="project-header">
-          <span class="project-icon"><i class="fa-solid fa-code-fork"></i></span>
-          <span class="project-badge">Merged</span>
-        </div>
-        <h3 class="project-title">First Contributions</h3>
-        <p class="project-desc">
-          Contributed to the world's most popular tutorial repository for Git and GitHub. Added my developer footprint
-          to the official list of contributors.
-        </p>
-        <div class="project-tech">
-          <span>Markdown</span>
-          <span>Git</span>
-          <span>Open Source</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/firstcontributions/first-contributions" target="_blank" class="project-link"
-            id="project-1-repo">Repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    <div class="projects-grid" id="github-projects-grid">
+      <!-- Dynamically Loaded via GitHub API -->
+      <div class="loading-spinner">Loading projects from GitHub...</div>
+    </div>
+  </section>
+
+  <!-- Certifications and Hackathons Section -->
+  <section class="section credentials" id="credentials">
+    <div class="credentials-grid">
+      <!-- Certifications -->
+      <div class="card glass-card">
+        <h2 class="section-title"><i class="fa-solid fa-award"></i> Certifications</h2>
+        <div class="credentials-list" id="certifications-list">
+          <!-- Dynamically Loaded from data.json -->
         </div>
       </div>
-
-      <!-- Project 2 -->
-      <div class="card project-card" id="project-card-code-contributions">
-        <div class="project-header">
-          <span class="project-icon"><i class="fa-solid fa-code"></i></span>
-          <span class="project-badge pending">Pending Review</span>
-        </div>
-        <h3 class="project-title">Code Contributions</h3>
-        <p class="project-desc">
-          Created a custom HTML/CSS developer card card for the official interactive coding contributor directory of the
-          first-contributions ecosystem.
-        </p>
-        <div class="project-tech">
-          <span>HTML5</span>
-          <span>CSS3</span>
-          <span>Git</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/arunkumarmeda27/code-contributions" target="_blank" class="project-link"
-            id="project-2-repo">Repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </div>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="card project-card" id="project-card-portfolio">
-        <div class="project-header">
-          <span class="project-icon"><i class="fa-solid fa-laptop-code"></i></span>
-          <span class="project-badge active-project">Active</span>
-        </div>
-        <h3 class="project-title">Developer Portfolio</h3>
-        <p class="project-desc">
-          This website itself! Designed with custom glassmorphism panels, dark-mode gradients, interactive particles,
-          and optimized for mobile screens.
-        </p>
-        <div class="project-tech">
-          <span>HTML5</span>
-          <span>CSS3</span>
-          <span>JavaScript</span>
-        </div>
-        <div class="project-links">
-          <a href="#" class="project-link" id="project-3-repo">Repo <i
-              class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <!-- Hackathons -->
+      <div class="card glass-card">
+        <h2 class="section-title"><i class="fa-solid fa-trophy"></i> Hackathons</h2>
+        <div class="credentials-list" id="hackathons-list">
+          <!-- Dynamically Loaded from data.json -->
         </div>
       </div>
     </div>

@@ -185,4 +185,121 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // --- 6. Fetch GitHub Profile Picture ---
+  function fetchGitHubProfile() {
+    fetch('https://api.github.com/users/arunkumarmeda27')
+      .then(res => res.json())
+      .then(data => {
+        const avatarEl = document.getElementById('github-avatar');
+        if (avatarEl && data.avatar_url) {
+          avatarEl.src = data.avatar_url;
+          avatarEl.style.display = 'block';
+        }
+      })
+      .catch(err => console.error('Error fetching GitHub profile:', err));
+  }
+
+  // --- 7. Fetch GitHub Repositories Dynamically ---
+  function fetchGitHubRepositories() {
+    const projectsGrid = document.getElementById('github-projects-grid');
+    if (!projectsGrid) return;
+
+    fetch('https://api.github.com/users/arunkumarmeda27/repos?sort=updated&per_page=10')
+      .then(res => res.json())
+      .then(repos => {
+        if (!Array.isArray(repos)) {
+          projectsGrid.innerHTML = '<div class="error">Failed to load projects from GitHub.</div>';
+          return;
+        }
+
+        // Clean out loading spinner
+        projectsGrid.innerHTML = '';
+
+        // Display up to 6 repositories
+        const displayRepos = repos.slice(0, 6);
+
+        displayRepos.forEach(repo => {
+          const card = document.createElement('div');
+          card.className = 'card project-card';
+          
+          const starBadge = repo.stargazers_count > 0 
+            ? `<span class="project-badge"><i class="fa-solid fa-star"></i> ${repo.stargazers_count}</span>`
+            : `<span class="project-badge active-project">${repo.language || 'Code'}</span>`;
+
+          card.innerHTML = `
+            <div class="project-header">
+              <span class="project-icon"><i class="fa-solid fa-folder-open"></i></span>
+              ${starBadge}
+            </div>
+            <h3 class="project-title">${repo.name}</h3>
+            <p class="project-desc">${repo.description || 'No description provided. Click the link below to explore the codebase.'}</p>
+            <div class="project-tech">
+              <span>${repo.language || 'HTML/CSS/JS'}</span>
+              <span>Stars: ${repo.stargazers_count}</span>
+            </div>
+            <div class="project-links">
+              <a href="${repo.html_url}" target="_blank" class="project-link">Explore Repo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          `;
+          projectsGrid.appendChild(card);
+        });
+      })
+      .catch(err => {
+        console.error('Error fetching GitHub repos:', err);
+        projectsGrid.innerHTML = '<div class="error">Error loading repositories. Please try again later.</div>';
+      });
+  }
+
+  // --- 8. Load Certifications and Hackathons from data.json ---
+  function loadCredentials() {
+    const certsList = document.getElementById('certifications-list');
+    const hacksList = document.getElementById('hackathons-list');
+
+    if (!certsList || !hacksList) return;
+
+    fetch('data.json')
+      .then(res => res.json())
+      .then(data => {
+        // Render Certifications
+        if (data.certifications && data.certifications.length > 0) {
+          certsList.innerHTML = '';
+          data.certifications.forEach(cert => {
+            const item = document.createElement('div');
+            item.className = 'credential-item';
+            item.innerHTML = `
+              <a href="${cert.link}" target="_blank" class="credential-name">${cert.name}</a>
+              <div class="credential-meta">
+                <span><i class="fa-solid fa-building"></i> ${cert.issuer}</span>
+                <span><i class="fa-solid fa-calendar-days"></i> ${cert.date}</span>
+              </div>
+            `;
+            certsList.appendChild(item);
+          });
+        }
+
+        // Render Hackathons
+        if (data.hackathons && data.hackathons.length > 0) {
+          hacksList.innerHTML = '';
+          data.hackathons.forEach(hack => {
+            const item = document.createElement('div');
+            item.className = 'credential-item';
+            item.innerHTML = `
+              <div class="credential-name">${hack.name}</div>
+              <div class="credential-meta">
+                <span><i class="fa-solid fa-laptop-code"></i> Project: ${hack.project}</span>
+                <span><i class="fa-solid fa-calendar-days"></i> ${hack.date}</span>
+              </div>
+            `;
+            hacksList.appendChild(item);
+          });
+        }
+      })
+      .catch(err => console.error('Error loading credentials from data.json:', err));
+  }
+
+  // Run initial data loaders
+  fetchGitHubProfile();
+  fetchGitHubRepositories();
+  loadCredentials();
 });

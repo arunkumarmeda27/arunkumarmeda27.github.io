@@ -1,0 +1,30 @@
+{
+  "certifications": [
+    {
+      "name": "Responsive Web Design Certification",
+      "issuer": "freeCodeCamp",
+      "date": "2026",
+      "link": "https://www.freecodecamp.org"
+    },
+    {
+      "name": "Git and GitHub Basics",
+      "issuer": "First Contributions",
+      "date": "2026",
+      "link": "https://github.com/firstcontributions/first-contributions"
+    }
+  ],
+  "hackathons": [
+    {
+      "name": "GitHub First Contributions Sprint",
+      "project": "Contributors List Update",
+      "date": "June 2026",
+      "role": "Participant"
+    },
+    {
+      "name": "Code Contributions Card Challenge",
+      "project": "Interactive HTML/CSS Profile Card",
+      "date": "June 2026",
+      "role": "Developer"
+    }
+  ]
+}
