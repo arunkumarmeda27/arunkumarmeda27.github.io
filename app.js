@@ -290,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span><i class="fa-solid fa-laptop-code"></i> Project: ${hack.project}</span>
                 <span><i class="fa-solid fa-calendar-days"></i> ${hack.date}</span>
               </div>
+              ${hack.description ? `<p class="credential-desc" style="margin-top: 0.5rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;">${hack.description}</p>` : ''}
             `;
             hacksList.appendChild(item);
           });
