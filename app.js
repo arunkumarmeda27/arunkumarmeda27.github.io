@@ -186,18 +186,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 6. Fetch GitHub Profile Picture ---
-  function fetchGitHubProfile() {
-    fetch('https://api.github.com/users/arunkumarmeda27')
-      .then(res => res.json())
-      .then(data => {
-        const avatarEl = document.getElementById('github-avatar');
-        if (avatarEl && data.avatar_url) {
-          avatarEl.src = data.avatar_url;
-          avatarEl.style.display = 'block';
-        }
-      })
-      .catch(err => console.error('Error fetching GitHub profile:', err));
+  // --- 6. Fetch Profile Picture from LinkedIn (with GitHub fallback) ---
+  function fetchProfilePicture() {
+    const avatarEl = document.getElementById('github-avatar');
+    if (!avatarEl) return;
+
+    // Direct dynamic link to LinkedIn Profile Picture via unavatar.io
+    const linkedinAvatarUrl = 'https://unavatar.io/linkedin/arun-kumar-meda-557b051b8';
+    
+    avatarEl.src = linkedinAvatarUrl;
+    avatarEl.style.display = 'block';
+
+    // If LinkedIn avatar fails to load, fallback to GitHub avatar
+    avatarEl.onerror = () => {
+      console.log('LinkedIn avatar failed to load, falling back to GitHub avatar...');
+      avatarEl.onerror = null; // Prevent infinite loop if fallback also fails
+      fetch('https://api.github.com/users/arunkumarmeda27')
+        .then(res => res.json())
+        .then(data => {
+          if (data.avatar_url) {
+            avatarEl.src = data.avatar_url;
+          }
+        })
+        .catch(err => console.error('Error loading fallback avatar:', err));
+    };
   }
 
   // --- 7. Fetch GitHub Repositories Dynamically ---
@@ -300,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Run initial data loaders
-  fetchGitHubProfile();
+  fetchProfilePicture();
   fetchGitHubRepositories();
   loadCredentials();
 });
