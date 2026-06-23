@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectsGrid = document.getElementById('github-projects-grid');
     if (!projectsGrid) return;
 
-    fetch('https://api.github.com/users/arunkumarmeda27/repos?sort=updated&per_page=10')
+    fetch('https://api.github.com/users/arunkumarmeda27/repos?sort=updated&per_page=100')
       .then(res => res.json())
       .then(repos => {
         if (!Array.isArray(repos)) {
@@ -228,10 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clean out loading spinner
         projectsGrid.innerHTML = '';
 
-        // Display up to 6 repositories
-        const displayRepos = repos.slice(0, 6);
-
-        displayRepos.forEach(repo => {
+        // Display all repositories
+        repos.forEach(repo => {
           const card = document.createElement('div');
           card.className = 'card project-card';
           
