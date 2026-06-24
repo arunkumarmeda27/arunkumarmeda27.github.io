@@ -14,3 +14,9 @@ Welcome to my personal portfolio repository! This website showcases my projects,
 
 This site is hosted live on GitHub Pages at:
 [**https://arunkumarmeda27.github.io**](https://arunkumarmeda27.github.io)
+
+## 🏆 Achievements
+- Automated dynamic GitHub and LinkedIn profile sync integration.
+- Configured dynamic portfolio styling and auto-updating credentials.
+- Earned the **Pair Extraordinaire** and **Quickdraw** achievements on GitHub.
+
