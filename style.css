@@ -724,3 +724,165 @@ h1, h2, h3, .nav-logo {
   }
 }
 
+/* Journey Timeline Section Styling */
+.timeline-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 3rem auto 0;
+}
+
+/* Central vertical path line */
+.timeline-container::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -1px;
+}
+
+/* Individual timeline item blocks */
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  background-color: transparent;
+  width: 50%;
+  transition: var(--transition);
+}
+
+/* Interactive timeline dots */
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  right: -8px;
+  background-color: var(--bg-primary);
+  border: 3px solid var(--primary);
+  position: absolute;
+  top: 35px;
+  border-radius: 50%;
+  z-index: 2;
+  transition: var(--transition);
+  box-shadow: 0 0 10px var(--primary);
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+  border-color: var(--secondary);
+  box-shadow: 0 0 10px var(--secondary);
+}
+
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.35);
+  background-color: var(--primary);
+  box-shadow: 0 0 20px var(--primary);
+}
+
+.timeline-item:nth-child(even):hover .timeline-dot {
+  background-color: var(--secondary);
+  box-shadow: 0 0 20px var(--secondary);
+}
+
+/* Left side alignment */
+.timeline-item.left {
+  left: 0;
+}
+
+/* Right side alignment */
+.timeline-item.right {
+  left: 50%;
+}
+
+.timeline-item.right .timeline-dot {
+  left: -8px;
+}
+
+/* Timeline card content style */
+.timeline-content {
+  padding: 1.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  position: relative;
+  transition: var(--transition);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.timeline-item:hover .timeline-content {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.03);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.08);
+}
+
+.timeline-item:nth-child(even):hover .timeline-content {
+  border-color: rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.03);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.08);
+}
+
+/* Date tag */
+.timeline-date {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timeline-item:nth-child(even) .timeline-date {
+  color: var(--secondary);
+}
+
+.timeline-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.timeline-org {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Responsive timeline for mobile devices */
+@media (max-width: 768px) {
+  .timeline-container::after {
+    left: 20px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    padding-left: 45px;
+    padding-right: 10px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .timeline-item.left, .timeline-item.right {
+    left: 0;
+  }
+  
+  .timeline-item.left .timeline-dot, .timeline-item.right .timeline-dot {
+    left: 12px;
+    right: auto;
+    top: 30px;
+  }
+  
+  .timeline-content {
+    padding: 1.25rem;
+  }
+}
+
+
