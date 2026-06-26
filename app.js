@@ -261,52 +261,53 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 
-  // --- 8. Load Certifications and Hackathons from data.json ---
+  // --- 8. Load Certifications and Hackathons from data.js ---
   function loadCredentials() {
     const certsList = document.getElementById('certifications-list');
     const hacksList = document.getElementById('hackathons-list');
 
     if (!certsList || !hacksList) return;
 
-    fetch('data.json')
-      .then(res => res.json())
-      .then(data => {
-        // Render Certifications
-        if (data.certifications && data.certifications.length > 0) {
-          certsList.innerHTML = '';
-          data.certifications.forEach(cert => {
-            const item = document.createElement('div');
-            item.className = 'credential-item';
-            item.innerHTML = `
-              <a href="${cert.link}" target="_blank" class="credential-name">${cert.name}</a>
-              <div class="credential-meta">
-                <span><i class="fa-solid fa-building"></i> ${cert.issuer}</span>
-                <span><i class="fa-solid fa-calendar-days"></i> ${cert.date}</span>
-              </div>
-            `;
-            certsList.appendChild(item);
-          });
-        }
+    const data = window.portfolioData;
+    if (!data) {
+      console.error('Error: window.portfolioData is not defined.');
+      return;
+    }
 
-        // Render Hackathons
-        if (data.hackathons && data.hackathons.length > 0) {
-          hacksList.innerHTML = '';
-          data.hackathons.forEach(hack => {
-            const item = document.createElement('div');
-            item.className = 'credential-item';
-            item.innerHTML = `
-              <div class="credential-name">${hack.name}</div>
-              <div class="credential-meta">
-                <span><i class="fa-solid fa-laptop-code"></i> Project: ${hack.project}</span>
-                <span><i class="fa-solid fa-calendar-days"></i> ${hack.date}</span>
-              </div>
-              ${hack.description ? `<p class="credential-desc" style="margin-top: 0.5rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;">${hack.description}</p>` : ''}
-            `;
-            hacksList.appendChild(item);
-          });
-        }
-      })
-      .catch(err => console.error('Error loading credentials from data.json:', err));
+    // Render Certifications
+    if (data.certifications && data.certifications.length > 0) {
+      certsList.innerHTML = '';
+      data.certifications.forEach(cert => {
+        const item = document.createElement('div');
+        item.className = 'credential-item';
+        item.innerHTML = `
+          <a href="${cert.link}" target="_blank" class="credential-name">${cert.name}</a>
+          <div class="credential-meta">
+            <span><i class="fa-solid fa-building"></i> ${cert.issuer}</span>
+            <span><i class="fa-solid fa-calendar-days"></i> ${cert.date}</span>
+          </div>
+        `;
+        certsList.appendChild(item);
+      });
+    }
+
+    // Render Hackathons
+    if (data.hackathons && data.hackathons.length > 0) {
+      hacksList.innerHTML = '';
+      data.hackathons.forEach(hack => {
+        const item = document.createElement('div');
+        item.className = 'credential-item';
+        item.innerHTML = `
+          <div class="credential-name">${hack.name}</div>
+          <div class="credential-meta">
+            <span><i class="fa-solid fa-laptop-code"></i> Project: ${hack.project}</span>
+            <span><i class="fa-solid fa-calendar-days"></i> ${hack.date}</span>
+          </div>
+          ${hack.description ? `<p class="credential-desc" style="margin-top: 0.5rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.5;">${hack.description}</p>` : ''}
+        `;
+        hacksList.appendChild(item);
+      });
+    }
   }
 
   // Run initial data loaders
@@ -314,3 +315,35 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchGitHubRepositories();
   loadCredentials();
 });
+
+// --- 9. Lightbox Modal System for Internship Media ---
+window.openMediaModal = function(src, captionText) {
+  const modal = document.getElementById('media-modal');
+  const modalImg = document.getElementById('modal-img');
+  const caption = document.getElementById('modal-caption');
+  
+  if (modal && modalImg && caption) {
+    modal.style.display = 'flex';
+    modalImg.src = src;
+    caption.textContent = captionText;
+    document.body.style.overflow = 'hidden'; // Stop background scrolling
+    
+    // Fade in effect
+    setTimeout(() => {
+      modal.classList.add('show');
+    }, 10);
+  }
+};
+
+window.closeMediaModal = function() {
+  const modal = document.getElementById('media-modal');
+  if (modal) {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto'; // Enable scrolling
+    }, 300);
+  }
+};
+
+

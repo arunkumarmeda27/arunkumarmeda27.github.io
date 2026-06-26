@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 
 <body>
@@ -34,6 +34,7 @@
       <ul class="nav-menu" id="nav-menu">
         <li><a href="#hero" class="nav-link active" id="link-hero">Home</a></li>
         <li><a href="#about" class="nav-link" id="link-about">About</a></li>
+        <li><a href="#internships" class="nav-link" id="link-internships">Internships</a></li>
         <li><a href="#timeline" class="nav-link" id="link-timeline">Journey</a></li>
         <li><a href="#skills" class="nav-link" id="link-skills">Skills</a></li>
         <li><a href="#projects" class="nav-link" id="link-projects">Projects</a></li>
@@ -95,14 +96,61 @@
     </div>
   </section>
 
+  <!-- Internships Section -->
+  <section class="section internships" id="internships">
+    <div class="card glass-card">
+      <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Internships</h2>
+      <div class="internships-list">
+        <div class="internship-item">
+          <div class="internship-header">
+            <div class="internship-title-group">
+              <h3 class="internship-role">Front-End AI Engineering Intern</h3>
+              <div class="internship-company">
+                <a href="https://flyrank.ai" target="_blank" class="company-link">FlyRank AI <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem;"></i></a>
+              </div>
+            </div>
+            <div class="internship-meta">
+              <span class="internship-date"><i class="fa-solid fa-calendar-days"></i> June 2026 - Present</span>
+              <span class="internship-duration"><i class="fa-solid fa-clock"></i> 12 weeks</span>
+            </div>
+          </div>
+          <ul class="internship-details">
+            <li>Accepted into the FlyRank AI Internship program to design and build premium web interfaces.</li>
+            <li>Collaborating on integrating artificial intelligence features into user-centric frontend experiences.</li>
+            <li>Utilizing modern frontend technologies and design patterns to build responsive, high-performance web pages.</li>
+          </ul>
+          <div class="internship-actions">
+            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal('flyrank_offer_letter.png', 'FlyRank AI Internship Offer Letter')">
+              <i class="fa-solid fa-file-contract"></i> View Offer Letter
+            </button>
+            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal('flyrank_poster.png', 'FlyRank AI Internship Joining Announcement')">
+              <i class="fa-solid fa-image"></i> View Announcement Poster
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Timeline Section -->
   <section class="section timeline" id="timeline">
     <div class="card glass-card">
       <h2 class="section-title text-center">My Journey</h2>
       <div class="timeline-container">
         
-        <!-- Timeline Item 1 -->
+        <!-- Timeline Item 0 (FlyRank AI Internship) -->
         <div class="timeline-item left">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">June 2026 - Present</span>
+            <h3 class="timeline-title">Front-End AI Engineering Intern</h3>
+            <p class="timeline-org">FlyRank AI</p>
+            <p class="timeline-desc">Accepted into the FlyRank AI Internship program to design and build premium web interfaces, integrate AI capabilities, and optimize frontend user experiences.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item right">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <span class="timeline-date">Jan 2026</span>
@@ -113,7 +161,7 @@
         </div>
 
         <!-- Timeline Item 2 -->
-        <div class="timeline-item right">
+        <div class="timeline-item left">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <span class="timeline-date">Academic Year 2025 - 2026</span>
@@ -124,7 +172,7 @@
         </div>
 
         <!-- Timeline Item 3 -->
-        <div class="timeline-item left">
+        <div class="timeline-item right">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <span class="timeline-date">Jan 2025</span>
@@ -135,7 +183,7 @@
         </div>
 
         <!-- Timeline Item 4 -->
-        <div class="timeline-item right">
+        <div class="timeline-item left">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
             <span class="timeline-date">2024 - Present</span>
@@ -258,8 +306,18 @@
     <p>&copy; 2026 Arun Kumar Meda. All rights reserved.</p>
   </footer>
 
+  <!-- Reusable Media Lightbox Modal -->
+  <div id="media-modal" class="media-modal" onclick="window.closeMediaModal()">
+    <span class="modal-close">&times;</span>
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+      <img class="modal-content" id="modal-img">
+      <div id="modal-caption" class="modal-caption"></div>
+    </div>
+  </div>
+
   <!-- Custom JavaScript -->
-  <script src="app.js"></script>
+  <script src="data.js?v=1.0"></script>
+  <script src="app.js?v=1.2"></script>
 </body>
 
 </html>
