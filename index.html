@@ -19,13 +19,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css?v=1.1">
+  <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 
 <body>
 
   <!-- Particle Background Canvas -->
   <canvas id="particle-canvas"></canvas>
+
+  <!-- Ambient Glow Orbs -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
 
   <!-- Navigation Bar -->
   <nav class="navbar" id="navbar">
@@ -39,6 +43,7 @@
         <li><a href="#skills" class="nav-link" id="link-skills">Skills</a></li>
         <li><a href="#projects" class="nav-link" id="link-projects">Projects</a></li>
         <li><a href="#contact" class="nav-link" id="link-contact">Contact</a></li>
+        <li><a href="resume.pdf" target="_blank" class="nav-link nav-resume-btn" id="link-resume"><i class="fa-solid fa-file-arrow-down"></i> Resume</a></li>
       </ul>
     </div>
   </nav>
@@ -47,6 +52,9 @@
   <header class="section hero" id="hero">
     <div class="hero-grid">
       <div class="hero-content">
+        <div class="status-pill">
+          <span class="pulse-dot"></span> OPEN FOR FRONT-END & FULL-STACK ROLES
+        </div>
         <h1 class="hero-title">Hi, I'm <span class="highlight">Arun Kumar Meda</span></h1>
         <p class="hero-subtitle">
           I build high-quality software & contribute to
@@ -54,11 +62,44 @@
         </p>
         <div class="hero-actions">
           <a href="#projects" class="btn btn-primary" id="btn-view-work">View My Work</a>
+          <a href="resume.pdf" target="_blank" class="btn btn-secondary btn-glow-resume" id="btn-view-resume"><i class="fa-solid fa-file-pdf"></i> Resume</a>
           <a href="#contact" class="btn btn-secondary" id="btn-get-in-touch">Let's Connect</a>
         </div>
       </div>
       <div class="hero-avatar-container">
         <img src="" id="github-avatar" class="avatar-glow" alt="Arun Kumar Meda" style="display: none;">
+        <div class="hero-code-editor card glass-card">
+          <div class="editor-header">
+            <div class="editor-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="editor-tabs">
+              <button class="editor-tab active" data-tab="dev"><i class="fa-brands fa-js" style="color: #f7df1e;"></i> developer.js</button>
+              <button class="editor-tab" data-tab="stack"><i class="fa-solid fa-layer-group" style="color: #38bdf8;"></i> stack.config</button>
+            </div>
+          </div>
+          <div class="editor-body">
+            <div class="tab-content active" id="tab-dev">
+<pre><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
+  <span class="code-prop">name</span>: <span class="code-string">'Arun Kumar Meda'</span>,
+  <span class="code-prop">role</span>: <span class="code-string">'Front-End AI Engineering Intern'</span>,
+  <span class="code-prop">company</span>: <span class="code-string">'FlyRank AI'</span>,
+  <span class="code-prop">education</span>: <span class="code-string">'B.E. ISE @ DSCE'</span>,
+  <span class="code-prop">skills</span>: [<span class="code-string">'JavaScript'</span>, <span class="code-string">'Python'</span>, <span class="code-string">'React'</span>, <span class="code-string">'C++'</span>],
+  <span class="code-prop">status</span>: <span class="code-string">'Building smart, high-performance web UIs'</span>
+};</code></pre>
+            </div>
+            <div class="tab-content" id="tab-stack" style="display: none;">
+<pre><code><span class="code-prop">[core_environment]</span>
+<span class="code-variable">frontend</span> = <span class="code-string">"HTML5, CSS3, JavaScript, React"</span>
+<span class="code-variable">backend</span>  = <span class="code-string">"Python, Node.js, FastAPI"</span>
+<span class="code-variable">database</span> = <span class="code-string">"Firestore, MongoDB"</span>
+<span class="code-variable">tooling</span>  = <span class="code-string">"Git, GitHub, VS Code, Linux"</span></code></pre>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -91,6 +132,25 @@
             <span class="detail-label"><i class="fa-solid fa-envelope"></i> Email:</span>
             <span class="detail-value">medaarun390@gmail.com</span>
           </div>
+          <div class="detail-item">
+            <span class="detail-label"><i class="fa-solid fa-file-pdf"></i> Resume:</span>
+            <span class="detail-value"><a href="resume.pdf" target="_blank" class="resume-link">View Resume (PDF) <i class="fa-solid fa-arrow-up-right-from-square"></i></a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">Top 37</div>
+          <div class="stat-label">National Hackathon Finalist</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">FlyRank AI</div>
+          <div class="stat-label">Front-End AI Intern</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">Active</div>
+          <div class="stat-label">Open Source Contributor</div>
         </div>
       </div>
     </div>
@@ -202,6 +262,49 @@
     <div class="card glass-card">
       <h2 class="section-title">My Skills & Tools</h2>
 
+      <div class="circular-skills-container">
+        <div class="circular-skill" data-percent="90">
+          <svg class="progress-ring" width="100" height="100">
+            <circle class="progress-ring-bg" cx="50" cy="50" r="42"/>
+            <circle class="progress-ring-circle" cx="50" cy="50" r="42"/>
+          </svg>
+          <div class="circle-content">
+            <span class="circle-percent">90%</span>
+            <span class="circle-name">JS / Web</span>
+          </div>
+        </div>
+        <div class="circular-skill" data-percent="85">
+          <svg class="progress-ring" width="100" height="100">
+            <circle class="progress-ring-bg" cx="50" cy="50" r="42"/>
+            <circle class="progress-ring-circle" cx="50" cy="50" r="42"/>
+          </svg>
+          <div class="circle-content">
+            <span class="circle-percent">85%</span>
+            <span class="circle-name">C / C++</span>
+          </div>
+        </div>
+        <div class="circular-skill" data-percent="80">
+          <svg class="progress-ring" width="100" height="100">
+            <circle class="progress-ring-bg" cx="50" cy="50" r="42"/>
+            <circle class="progress-ring-circle" cx="50" cy="50" r="42"/>
+          </svg>
+          <div class="circle-content">
+            <span class="circle-percent">80%</span>
+            <span class="circle-name">Python</span>
+          </div>
+        </div>
+        <div class="circular-skill" data-percent="88">
+          <svg class="progress-ring" width="100" height="100">
+            <circle class="progress-ring-bg" cx="50" cy="50" r="42"/>
+            <circle class="progress-ring-circle" cx="50" cy="50" r="42"/>
+          </svg>
+          <div class="circle-content">
+            <span class="circle-percent">88%</span>
+            <span class="circle-name">Git / DevOps</span>
+          </div>
+        </div>
+      </div>
+
       <h3>Programming Languages</h3>
       <div class="skills-grid">
         <div class="skill-badge js-badge" id="skill-js">
@@ -247,6 +350,19 @@
   <!-- Projects Section -->
   <section class="section projects" id="projects">
     <h2 class="section-title text-center">Featured Projects</h2>
+
+    <div class="project-search-container">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" id="project-search" class="project-search-input" placeholder="Search projects by name, language, or keyword...">
+    </div>
+
+    <div class="project-filters" id="project-filters">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="featured">Featured</button>
+      <button class="filter-btn" data-filter="web">Web & AI</button>
+      <button class="filter-btn" data-filter="hackathon">Hackathons</button>
+    </div>
+
     <div class="projects-grid" id="github-projects-grid">
       <!-- Dynamically Loaded via GitHub API -->
       <div class="loading-spinner">Loading projects from GitHub...</div>
@@ -275,32 +391,74 @@
 
   <!-- Contact Section -->
   <section class="section contact" id="contact">
-    <div class="card glass-card text-center">
-      <h2 class="section-title">Get In Touch</h2>
-      <p class="contact-text">
-        I am currently open to collaboration, open-source projects, and full-time opportunities. Drop me an email or
-        connect on LinkedIn!
-      </p>
+    <h2 class="section-title text-center">Get In Touch</h2>
 
-      <div class="contact-buttons">
-        <a href="mailto:medaarun390@gmail.com" class="btn btn-primary btn-glow" id="contact-btn-email">
-          <i class="fa-solid fa-envelope"></i> Email Me
-        </a>
-        <a href="https://www.linkedin.com/in/arun-kumar-meda-557b051b8" target="_blank" class="btn btn-secondary"
-          id="contact-btn-linkedin">
-          <i class="fa-brands fa-linkedin"></i> LinkedIn
-        </a>
-        <a href="https://github.com/arunkumarmeda27" target="_blank" class="btn btn-secondary"
-          id="contact-btn-github">
-          <i class="fa-brands fa-github"></i> GitHub
-        </a>
+    <div class="contact-grid">
+      <!-- Contact Info Card -->
+      <div class="card glass-card contact-info-card">
+        <h3 class="contact-subtitle"><i class="fa-solid fa-paper-plane"></i> Let's Connect</h3>
+        <p class="contact-text">
+          I am currently open to collaboration, open-source projects, and frontend AI engineering opportunities.
+          Drop me a message or connect via social links!
+        </p>
+
+        <div class="contact-buttons">
+          <a href="mailto:medaarun390@gmail.com" class="btn btn-primary btn-glow" id="contact-btn-email">
+            <i class="fa-solid fa-envelope"></i> Email Me
+          </a>
+          <a href="resume.pdf" target="_blank" class="btn btn-secondary" id="contact-btn-resume">
+            <i class="fa-solid fa-file-pdf"></i> Resume
+          </a>
+          <a href="https://www.linkedin.com/in/arun-kumar-meda-557b051b8" target="_blank" class="btn btn-secondary"
+            id="contact-btn-linkedin">
+            <i class="fa-brands fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://github.com/arunkumarmeda27" target="_blank" class="btn btn-secondary"
+            id="contact-btn-github">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+        </div>
+
+        <div class="copy-email-section">
+          <button class="copy-btn" id="copy-email-btn" data-email="medaarun390@gmail.com">
+            Copy Email Address <i class="fa-regular fa-copy"></i>
+          </button>
+          <span class="tooltip" id="email-tooltip">Copied!</span>
+        </div>
       </div>
 
-      <div class="copy-email-section">
-        <button class="copy-btn" id="copy-email-btn" data-email="medaarun390@gmail.com">
-          Copy Email Address <i class="fa-regular fa-copy"></i>
-        </button>
-        <span class="tooltip" id="email-tooltip">Copied!</span>
+      <!-- IDE Code Editor Contact Form -->
+      <div class="card glass-card contact-editor-card">
+        <div class="editor-header">
+          <div class="editor-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="editor-title"><i class="fa-solid fa-code"></i> contact_session.js</span>
+        </div>
+        <form class="contact-code-form" id="contact-form">
+          <div class="code-line"><span class="code-keyword">function</span> <span class="code-func">sendMessage</span>() {</div>
+          <div class="form-group code-indent">
+            <label for="sender-name"><span class="code-variable">const</span> <span class="code-prop">name</span> =</label>
+            <input type="text" id="sender-name" class="code-input" placeholder="'Your Name'" required>
+          </div>
+          <div class="form-group code-indent">
+            <label for="sender-email"><span class="code-variable">const</span> <span class="code-prop">email</span> =</label>
+            <input type="email" id="sender-email" class="code-input" placeholder="'your.email@example.com'" required>
+          </div>
+          <div class="form-group code-indent">
+            <label for="sender-message"><span class="code-variable">const</span> <span class="code-prop">message</span> =</label>
+            <textarea id="sender-message" class="code-input code-textarea" rows="3" placeholder="'Write your message here...'" required></textarea>
+          </div>
+          <div class="code-line"><span class="code-keyword">return</span> <span class="code-variable">transmission</span>;</div>
+          <div class="code-line">}</div>
+
+          <button type="submit" class="btn btn-primary btn-submit-code">
+            <i class="fa-solid fa-paper-plane"></i> Initiate Transmission
+          </button>
+          <div class="terminal-status" id="terminal-status"></div>
+        </form>
       </div>
     </div>
   </section>
@@ -321,7 +479,7 @@
 
   <!-- Custom JavaScript -->
   <script src="data.js?v=1.0"></script>
-  <script src="app.js?v=1.2"></script>
+  <script src="app.js?v=2.0"></script>
 </body>
 
 </html>

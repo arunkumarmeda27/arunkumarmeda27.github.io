@@ -310,6 +310,125 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // --- 10. Circular Skill Ring Progress Animation ---
+  function animateCircularSkills() {
+    const circles = document.querySelectorAll('.progress-ring-circle');
+    circles.forEach(circle => {
+      const parent = circle.closest('.circular-skill');
+      if (!parent) return;
+      const percent = parseInt(parent.getAttribute('data-percent'), 10) || 0;
+      const radius = circle.r.baseVal.value;
+      const circumference = 2 * Math.PI * radius;
+
+      circle.style.strokeDasharray = `${circumference} ${circumference}`;
+      const offset = circumference - (percent / 100) * circumference;
+      circle.style.strokeDashoffset = offset;
+    });
+  }
+
+  const skillsSection = document.getElementById('skills');
+  if (skillsSection) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCircularSkills();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(skillsSection);
+  }
+
+  // --- 11. Hero Code Editor Tab Switcher ---
+  const tabBtns = document.querySelectorAll('.editor-tab');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const targetTab = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.style.display = 'none';
+        content.classList.remove('active');
+      });
+
+      const activeContent = document.getElementById(`tab-${targetTab}`);
+      if (activeContent) {
+        activeContent.style.display = 'block';
+        activeContent.classList.add('active');
+      }
+    });
+  });
+
+  // --- 12. Real-Time Project Search & Category Filter ---
+  const searchInput = document.getElementById('project-search');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+
+  function filterProjects() {
+    const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    const activeFilterBtn = document.querySelector('.filter-btn.active');
+    const filterCategory = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : 'all';
+
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach(card => {
+      const title = card.querySelector('.project-title')?.textContent.toLowerCase() || '';
+      const desc = card.querySelector('.project-desc')?.textContent.toLowerCase() || '';
+      const tech = card.querySelector('.project-tech')?.textContent.toLowerCase() || '';
+      const cardCategory = card.getAttribute('data-category') || 'web';
+
+      const matchesSearch = !query || title.includes(query) || desc.includes(query) || tech.includes(query);
+      const matchesCategory = filterCategory === 'all' || cardCategory === filterCategory;
+
+      if (matchesSearch && matchesCategory) {
+        card.style.display = 'flex';
+        card.style.opacity = '1';
+      } else {
+        card.style.opacity = '0';
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterProjects);
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterProjects();
+    });
+  });
+
+  // --- 13. IDE Contact Form Submission ---
+  const contactForm = document.getElementById('contact-form');
+  const terminalStatus = document.getElementById('terminal-status');
+
+  if (contactForm && terminalStatus) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const senderName = document.getElementById('sender-name').value;
+      const senderEmail = document.getElementById('sender-email').value;
+      const senderMsg = document.getElementById('sender-message').value;
+
+      terminalStatus.classList.add('active');
+      terminalStatus.innerHTML = `<span style="color: var(--secondary);">&gt;</span> Initiating transmission for <strong>${senderName}</strong>...`;
+
+      setTimeout(() => {
+        terminalStatus.innerHTML = `<span style="color: var(--primary);"><i class="fa-solid fa-circle-check"></i> Transmission ready!</span> Opening mail client...`;
+        
+        const subject = encodeURIComponent(`Portfolio Inquiry from ${senderName}`);
+        const body = encodeURIComponent(`Name: ${senderName}\nEmail: ${senderEmail}\n\nMessage:\n${senderMsg}`);
+        
+        setTimeout(() => {
+          window.location.href = `mailto:medaarun390@gmail.com?subject=${subject}&body=${body}`;
+        }, 1000);
+      }, 1000);
+    });
+  }
+
   // Run initial data loaders
   fetchProfilePicture();
   fetchGitHubRepositories();
@@ -326,12 +445,9 @@ window.openMediaModal = function(src, captionText) {
     modal.style.display = 'flex';
     modalImg.src = src;
     caption.textContent = captionText;
-    document.body.style.overflow = 'hidden'; // Stop background scrolling
+    document.body.style.overflow = 'hidden';
     
-    // Fade in effect
-    setTimeout(() => {
-      modal.classList.add('show');
-    }, 10);
+    setTimeout(() => { modal.classList.add('show'); }, 10);
   }
 };
 
@@ -341,9 +457,10 @@ window.closeMediaModal = function() {
     modal.classList.remove('show');
     setTimeout(() => {
       modal.style.display = 'none';
-      document.body.style.overflow = 'auto'; // Enable scrolling
+      document.body.style.overflow = 'auto';
     }, 300);
   }
 };
+
 
 
