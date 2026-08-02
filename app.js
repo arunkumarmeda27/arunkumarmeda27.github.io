@@ -37,8 +37,77 @@ document.addEventListener('DOMContentLoaded', () => {
   typeText();
 
 
-  // --- 2. Floating Navbar Scroll Effect ---
+  // --- 2. Floating Navbar & Mobile Menu System ---
   const navbar = document.getElementById('navbar');
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  // Create backdrop element if it doesn't exist
+  let navBackdrop = document.querySelector('.nav-backdrop');
+  if (!navBackdrop) {
+    navBackdrop = document.createElement('div');
+    navBackdrop.className = 'nav-backdrop';
+    document.body.appendChild(navBackdrop);
+  }
+
+  function toggleMobileMenu(open) {
+    const isOpen = open !== undefined ? open : !navMenu.classList.contains('active');
+    
+    if (isOpen) {
+      // Show menu: set display:flex first, then animate transform on next frame
+      if (navMenu) {
+        navMenu.style.display = 'flex';
+        // Force reflow so the browser registers display:flex before animating
+        navMenu.offsetHeight;
+        navMenu.classList.add('active');
+      }
+      if (navToggle) {
+        navToggle.classList.add('active');
+        navToggle.setAttribute('aria-expanded', 'true');
+      }
+      navBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Close menu: animate transform first, then hide after transition
+      if (navMenu) navMenu.classList.remove('active');
+      if (navToggle) {
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+      navBackdrop.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      
+      // Wait for the slide-out transition to finish, then set display:none
+      if (navMenu) {
+        const onTransitionEnd = () => {
+          if (!navMenu.classList.contains('active')) {
+            navMenu.style.display = 'none';
+          }
+          navMenu.removeEventListener('transitionend', onTransitionEnd);
+        };
+        navMenu.addEventListener('transitionend', onTransitionEnd);
+      }
+    }
+  }
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMobileMenu();
+    });
+
+    navBackdrop.addEventListener('click', () => {
+      toggleMobileMenu(false);
+    });
+
+    // Close menu on Escape key press
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        toggleMobileMenu(false);
+      }
+    });
+  }
+
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
@@ -68,6 +137,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (link.getAttribute('href') === `#${currentSectionId}`) {
         link.classList.add('active');
       }
+    });
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      toggleMobileMenu(false);
     });
   });
 
