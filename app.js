@@ -510,32 +510,90 @@ document.addEventListener('DOMContentLoaded', () => {
   loadCredentials();
 });
 
-// --- 9. Lightbox Modal System for Internship Media ---
-window.openMediaModal = function(src, captionText) {
-  const modal = document.getElementById('media-modal');
-  const modalImg = document.getElementById('modal-img');
-  const caption = document.getElementById('modal-caption');
-  
-  if (modal && modalImg && caption) {
-    modal.style.display = 'flex';
-    modalImg.src = src;
-    caption.textContent = captionText;
-    document.body.style.overflow = 'hidden';
-    
-    setTimeout(() => { modal.classList.add('show'); }, 10);
-  }
-};
+// --- 9. Multi-Page Lightbox Modal System for Internship Documents ---
+(function () {
+  let _pages  = [];   // Array of image src strings
+  let _index  = 0;    // Current page index
+  let _caption = '';  // Document title
 
-window.closeMediaModal = function() {
-  const modal = document.getElementById('media-modal');
-  if (modal) {
+  function getEls() {
+    return {
+      modal:   document.getElementById('media-modal'),
+      img:     document.getElementById('modal-img'),
+      caption: document.getElementById('modal-caption'),
+      counter: document.getElementById('modal-page-counter'),
+      prev:    document.getElementById('modal-prev'),
+      next:    document.getElementById('modal-next'),
+    };
+  }
+
+  function renderPage() {
+    const { img, caption, counter, prev, next } = getEls();
+    if (!img) return;
+
+    // Fade out → swap src → fade in
+    img.style.opacity = '0';
+    setTimeout(() => {
+      img.src = _pages[_index];
+      img.style.opacity = '1';
+    }, 150);
+
+    caption.textContent = _caption;
+
+    // Page counter — hide when only 1 page
+    if (_pages.length > 1) {
+      counter.textContent = `Page ${_index + 1} of ${_pages.length}`;
+      counter.style.display = 'block';
+    } else {
+      counter.style.display = 'none';
+    }
+
+    // Arrow visibility
+    prev.style.display = (_pages.length > 1 && _index > 0) ? 'flex' : 'none';
+    next.style.display = (_pages.length > 1 && _index < _pages.length - 1) ? 'flex' : 'none';
+  }
+
+  // Public: open modal — accepts single string OR array of strings
+  window.openMediaModal = function (src, captionText) {
+    _pages   = Array.isArray(src) ? src : [src];
+    _index   = 0;
+    _caption = captionText || '';
+
+    const { modal } = getEls();
+    if (!modal) return;
+
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    renderPage();
+    setTimeout(() => modal.classList.add('show'), 10);
+  };
+
+  // Public: navigate pages (-1 = prev, +1 = next)
+  window.modalNav = function (dir) {
+    const newIdx = _index + dir;
+    if (newIdx >= 0 && newIdx < _pages.length) {
+      _index = newIdx;
+      renderPage();
+    }
+  };
+
+  // Public: close modal
+  window.closeMediaModal = function () {
+    const { modal } = getEls();
+    if (!modal) return;
     modal.classList.remove('show');
     setTimeout(() => {
       modal.style.display = 'none';
       document.body.style.overflow = 'auto';
     }, 300);
-  }
-};
+  };
 
-
-
+  // Keyboard support: ← → arrows, Escape
+  document.addEventListener('keydown', (e) => {
+    const { modal } = getEls();
+    if (!modal || modal.style.display === 'none') return;
+    if (e.key === 'ArrowLeft')  window.modalNav(-1);
+    if (e.key === 'ArrowRight') window.modalNav(1);
+    if (e.key === 'Escape')     window.closeMediaModal();
+  });
+})();

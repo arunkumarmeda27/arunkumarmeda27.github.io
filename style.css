@@ -1977,5 +1977,88 @@ h1, h2, h3, .nav-logo {
   margin-top: 1.1rem;
 }
 
+/* ── Multi-Page Modal Enhancements ── */
+
+/* Smooth page-flip fade on the image */
+#modal-img {
+  transition: opacity 0.15s ease;
+}
+
+/* Footer: caption + page counter side by side */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.25rem 0;
+  width: 100%;
+}
+
+/* Page counter pill */
+.modal-page-counter {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 999px;
+  padding: 0.2rem 0.75rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Prev / Next arrow buttons */
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: var(--primary);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: none;           /* hidden by default, JS shows them */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: var(--transition);
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+.modal-nav:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+.modal-prev { left: -54px; }
+.modal-next { right: -54px; }
+
+/* On small screens arrows go inside the wrapper */
+@media (max-width: 600px) {
+  .modal-prev { left: 4px; }
+  .modal-next { right: 4px; }
+  .modal-nav {
+    width: 34px;
+    height: 34px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Doc pages badge inside button */
+.doc-pages {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+
+
 
 

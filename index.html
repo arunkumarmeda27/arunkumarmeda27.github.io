@@ -202,10 +202,10 @@
             <span class="tech-tag"><i class="fa-solid fa-mobile-screen"></i> Responsive UI</span>
           </div>
           <div class="internship-actions">
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal('flyrank_offer_letter.png', 'FlyRank AI Internship Offer Letter')">
+            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['flyrank_offer_letter.png'], 'FlyRank AI — Internship Offer Letter')">
               <i class="fa-solid fa-file-contract"></i> View Offer Letter
             </button>
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal('flyrank_poster.png', 'FlyRank AI Internship Joining Announcement')">
+            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['flyrank_poster.png'], 'FlyRank AI — Internship Joining Announcement')">
               <i class="fa-solid fa-image"></i> View Announcement Poster
             </button>
           </div>
@@ -240,10 +240,10 @@
             <span class="tech-tag"><i class="fa-solid fa-handshake-angle"></i> NGO / CSR</span>
           </div>
           <div class="internship-actions">
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal('inamigos_offer_letter.png', 'InAmigos Foundation — Web Developer Internship Offer Letter')">
-              <i class="fa-solid fa-file-contract"></i> View Offer Letter
+            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['inamigos_offer_letter_p1.png','inamigos_offer_letter_p2.png'], 'InAmigos Foundation — Web Developer Internship Offer Letter')">
+              <i class="fa-solid fa-file-contract"></i> View Offer Letter <span class="doc-pages">2 pages</span>
             </button>
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal('inamigos_selection_letter.png', 'InAmigos Foundation — Web Developer Internship Selection Letter')">
+            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['inamigos_selection_letter.png'], 'InAmigos Foundation — Web Developer Internship Selection Letter')">
               <i class="fa-solid fa-certificate"></i> View Selection Letter
             </button>
           </div>
@@ -279,10 +279,10 @@
             <span class="tech-tag"><i class="fa-solid fa-bug"></i> Bug Fixing</span>
           </div>
           <div class="internship-actions">
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal('gema_offer_letter.png', 'GEMA Education Technology — WordPress Developer Intern Offer Letter')">
-              <i class="fa-solid fa-file-contract"></i> View Offer Letter
+            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['gema_offer_letter_p1.png','gema_offer_letter_p2.png','gema_offer_letter_p3.png'], 'GEMA Education Technology — WordPress Developer Intern Offer Letter')">
+              <i class="fa-solid fa-file-contract"></i> View Offer Letter <span class="doc-pages">3 pages</span>
             </button>
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal('gema_selection_letter.png', 'GEMA Education Technology — Certificate of Selection (Internshala)')">
+            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['gema_selection_letter.png'], 'GEMA Education Technology — Certificate of Selection (Internshala)')">
               <i class="fa-solid fa-certificate"></i> View Selection Certificate
             </button>
           </div>
@@ -589,12 +589,26 @@
     <p>&copy; 2026 Arun Kumar Meda. All rights reserved.</p>
   </footer>
 
-  <!-- Reusable Media Lightbox Modal -->
+  <!-- Reusable Media Lightbox Modal (multi-page carousel) -->
   <div id="media-modal" class="media-modal" onclick="window.closeMediaModal()">
     <span class="modal-close">&times;</span>
     <div class="modal-content-wrapper" onclick="event.stopPropagation()">
-      <img class="modal-content" id="modal-img">
-      <div id="modal-caption" class="modal-caption"></div>
+      <!-- Prev / Next arrows -->
+      <button class="modal-nav modal-prev" id="modal-prev" onclick="window.modalNav(-1)" aria-label="Previous page">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="modal-nav modal-next" id="modal-next" onclick="window.modalNav(1)" aria-label="Next page">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- Image display -->
+      <img class="modal-content" id="modal-img" alt="Document page">
+
+      <!-- Caption + page counter -->
+      <div class="modal-footer">
+        <div id="modal-caption" class="modal-caption"></div>
+        <div id="modal-page-counter" class="modal-page-counter"></div>
+      </div>
     </div>
   </div>
 
