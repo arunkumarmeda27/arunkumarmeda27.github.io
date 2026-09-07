@@ -1,75 +1,93 @@
+import os
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, HRFlowable
-from reportlab.lib.enums import TA_CENTER, TA_LEFT
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, HRFlowable, Table, TableStyle
+from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
+import pypdf
 
 def generate_ats_resume(output_path="resume.pdf"):
+    # Letter size: 612 x 792 points
+    # Printable area with 34pt margins: 544 x 728 points
     doc = SimpleDocTemplate(
         output_path,
         pagesize=letter,
-        leftMargin=40,
-        rightMargin=40,
-        topMargin=36,
-        bottomMargin=36
+        leftMargin=34,
+        rightMargin=34,
+        topMargin=26,
+        bottomMargin=26
     )
 
     styles = getSampleStyleSheet()
 
-    PRIMARY   = colors.HexColor('#0F172A')
-    ACCENT    = colors.HexColor('#1D4ED8')
-    TEXT      = colors.HexColor('#1E293B')
-    MUTED     = colors.HexColor('#64748B')
-    DIVIDER   = colors.HexColor('#CBD5E1')
+    PRIMARY   = colors.HexColor('#0F172A') # Slate 900
+    ACCENT    = colors.HexColor('#1D4ED8') # Blue 700
+    TEXT      = colors.HexColor('#1E293B') # Slate 800
+    MUTED     = colors.HexColor('#475569') # Slate 600
 
-    # --- Styles ---
     name_style = ParagraphStyle(
         'Name', parent=styles['Normal'],
-        fontName='Helvetica-Bold', fontSize=22, leading=26,
+        fontName='Helvetica-Bold', fontSize=18.5, leading=21,
         alignment=TA_CENTER, textColor=PRIMARY
     )
     title_style = ParagraphStyle(
         'Title', parent=styles['Normal'],
-        fontName='Helvetica-Bold', fontSize=10, leading=13,
+        fontName='Helvetica-Bold', fontSize=9, leading=12,
         alignment=TA_CENTER, textColor=ACCENT, spaceBefore=2
     )
     contact_style = ParagraphStyle(
         'Contact', parent=styles['Normal'],
-        fontName='Helvetica', fontSize=8.5, leading=12,
-        alignment=TA_CENTER, textColor=MUTED, spaceBefore=4
+        fontName='Helvetica', fontSize=8, leading=11,
+        alignment=TA_CENTER, textColor=MUTED, spaceBefore=3
     )
-    section_style = ParagraphStyle(
-        'Section', parent=styles['Normal'],
-        fontName='Helvetica-Bold', fontSize=10.5, leading=13,
-        alignment=TA_LEFT, textColor=PRIMARY, spaceBefore=10, spaceAfter=1
-    )
-    job_title_style = ParagraphStyle(
-        'JobTitle', parent=styles['Normal'],
+
+    sec_style = ParagraphStyle(
+        'Sec', parent=styles['Normal'],
         fontName='Helvetica-Bold', fontSize=9.5, leading=12,
-        alignment=TA_LEFT, textColor=PRIMARY
+        alignment=TA_LEFT, textColor=PRIMARY, spaceBefore=5, spaceAfter=1
     )
-    meta_style = ParagraphStyle(
-        'Meta', parent=styles['Normal'],
-        fontName='Helvetica', fontSize=8.5, leading=11.5,
-        alignment=TA_LEFT, textColor=MUTED, spaceBefore=1
-    )
+
+    job_l = ParagraphStyle('JobL', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=8.5, leading=11, textColor=PRIMARY)
+    job_r = ParagraphStyle('JobR', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=8, leading=11, alignment=TA_RIGHT, textColor=ACCENT)
+    sub_l = ParagraphStyle('SubL', parent=styles['Normal'], fontName='Helvetica', fontSize=7.8, leading=10, textColor=MUTED)
+    sub_r = ParagraphStyle('SubR', parent=styles['Normal'], fontName='Helvetica', fontSize=7.8, leading=10, alignment=TA_RIGHT, textColor=MUTED)
+
     body_style = ParagraphStyle(
         'Body', parent=styles['Normal'],
-        fontName='Helvetica', fontSize=9, leading=12,
-        alignment=TA_LEFT, textColor=TEXT
+        fontName='Helvetica', fontSize=8, leading=10.5, textColor=TEXT
     )
     bullet_style = ParagraphStyle(
         'Bullet', parent=styles['Normal'],
-        fontName='Helvetica', fontSize=9, leading=12,
-        alignment=TA_LEFT, textColor=TEXT,
-        leftIndent=14, firstLineIndent=-10, spaceAfter=3
+        fontName='Helvetica', fontSize=8, leading=10.5, textColor=TEXT,
+        leftIndent=10, firstLineIndent=-7, spaceAfter=1.2
     )
 
     def section(title):
         return [
-            Paragraph(title.upper(), section_style),
-            HRFlowable(width="100%", thickness=1, color=ACCENT, spaceBefore=2, spaceAfter=5)
+            Paragraph(title.upper(), sec_style),
+            HRFlowable(width="100%", thickness=0.8, color=ACCENT, spaceBefore=1, spaceAfter=3)
         ]
+
+    def entry_header(title, company, dates, location):
+        data = [
+            [
+                Paragraph(f"<b>{title}</b> | <font color='#1D4ED8'><b>{company}</b></font>", job_l),
+                Paragraph(dates, job_r)
+            ],
+            [
+                Paragraph(location, sub_l),
+                Paragraph("", sub_r)
+            ]
+        ]
+        t = Table(data, colWidths=[395, 149])
+        t.setStyle(TableStyle([
+            ('VALIGN', (0,0), (-1,-1), 'TOP'),
+            ('LEFTPADDING', (0,0), (-1,-1), 0),
+            ('RIGHTPADDING', (0,0), (-1,-1), 0),
+            ('TOPPADDING', (0,0), (-1,-1), 0),
+            ('BOTTOMPADDING', (0,0), (-1,-1), 0.5),
+        ]))
+        return t
 
     def bullet(text):
         return Paragraph(f"&bull; {text}", bullet_style)
@@ -78,97 +96,93 @@ def generate_ats_resume(output_path="resume.pdf"):
 
     # ── HEADER ────────────────────────────────────────────────────────────────
     story.append(Paragraph("ARUN KUMAR MEDA", name_style))
-    story.append(Paragraph("Software Engineer &nbsp;|&nbsp; Front-End AI Engineering Intern", title_style))
+    story.append(Paragraph("Software Engineer | Front-End & AI Engineering Intern", title_style))
     story.append(Paragraph(
         "+91 9686097551 &nbsp;|&nbsp; arunkumarmeda27@gmail.com &nbsp;|&nbsp; "
         "linkedin.com/in/arun-kumar-meda-557b051b8 &nbsp;|&nbsp; "
         "github.com/arunkumarmeda27 &nbsp;|&nbsp; Bengaluru, India",
         contact_style
     ))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=ACCENT, spaceBefore=7, spaceAfter=2))
+    story.append(HRFlowable(width="100%", thickness=1.2, color=ACCENT, spaceBefore=3, spaceAfter=2))
 
-    # ── SUMMARY ───────────────────────────────────────────────────────────────
+    # ── PROFESSIONAL SUMMARY ──────────────────────────────────────────────────
     story.extend(section("Professional Summary"))
     story.append(Paragraph(
-        "High-performing Software Engineer and Front-End AI Engineering Intern with proficiency in "
-        "JavaScript (ES6+), React, C/C++, and Python. Demonstrated success engineering production-grade "
-        "web platforms serving 500+ users, reducing operational overhead by 80%, and ranking in the "
-        "<b>Top 37 National Finalists (Top 1.5%) out of 2,500+ teams</b>. "
-        "Skilled at converting complex requirements into fast, accessible, user-centric interfaces.",
+        "Results-driven Software Engineer and Front-End AI Engineering Intern proficient in "
+        "JavaScript (ES6+), React.js, Python, C/C++, and WordPress development. Demonstrated track record "
+        "engineering production-grade web applications for 500+ users, reducing registration overhead by 60%, and ranking in the "
+        "<b>Top 37 National Finalists (Top 1.5%) out of 2,500+ teams</b> in the IBM & ACM-sponsored Hackathon. "
+        "Adept at translating design and business specifications into responsive, high-performance, accessible digital interfaces.",
         body_style
     ))
 
     # ── TECHNICAL SKILLS ──────────────────────────────────────────────────────
     story.extend(section("Technical Skills"))
-    story.append(Paragraph(
-        "<b>Languages:</b> JavaScript (ES6+), C, C++, Python, HTML5, CSS3, SQL", body_style))
-    story.append(Spacer(1, 2))
-    story.append(Paragraph(
-        "<b>Frontend:</b> React.js, Vite, Web APIs, CSS Flexbox/Grid, Responsive Design, Component Architecture", body_style))
-    story.append(Spacer(1, 2))
-    story.append(Paragraph(
-        "<b>Backend & Databases:</b> Node.js, FastAPI, REST APIs, Firebase Firestore, MongoDB, Python Server-Side", body_style))
-    story.append(Spacer(1, 2))
-    story.append(Paragraph(
-        "<b>Tools & Practices:</b> Git, GitHub, VS Code, Linux Shell, RBAC Authentication, Rate-Limiting Middleware, CI/CD", body_style))
+    story.append(Paragraph("<b>Languages:</b> JavaScript (ES6+), Python, C, C++, HTML5, CSS3, SQL, PHP", body_style))
+    story.append(Spacer(1, 0.5))
+    story.append(Paragraph("<b>Frontend & CMS:</b> React.js, Vite, WordPress (Custom Themes & Plugins), Responsive UI, Flexbox/Grid, Web APIs", body_style))
+    story.append(Spacer(1, 0.5))
+    story.append(Paragraph("<b>Backend & Databases:</b> Node.js, FastAPI, RESTful APIs, Firebase Firestore, MongoDB", body_style))
+    story.append(Spacer(1, 0.5))
+    story.append(Paragraph("<b>Tools & Practices:</b> Git, GitHub, VS Code, Linux Shell, RBAC Auth, Core Web Vitals, Performance Tuning, Agile", body_style))
 
-    # ── WORK EXPERIENCE ───────────────────────────────────────────────────────
+    # ── WORK EXPERIENCE & INTERNSHIPS ─────────────────────────────────────────
     story.extend(section("Work Experience & Internships"))
 
-    # FlyRank AI
-    story.append(Paragraph("Front-End AI Engineering Intern &nbsp;&mdash;&nbsp; <font color='#1D4ED8'>FlyRank AI</font>", job_title_style))
-    story.append(Paragraph("June 2026 &ndash; Present &nbsp;|&nbsp; 12-Week Internship &nbsp;|&nbsp; Bengaluru, India", meta_style))
-    story.append(Spacer(1, 3))
-    story.append(bullet("Selected out of 200+ applicants; designed and shipped <b>15+ production-ready React web interfaces</b>, increasing user engagement metrics by <b>35%</b> within the first 6 weeks."))
-    story.append(bullet("Architected <b>5 AI-driven feature workflows</b> integrating third-party ML APIs, cutting client-side UI rendering latency by <b>40%</b> and reducing average page load time from 3.2s to 1.9s."))
-    story.append(bullet("Refactored <b>20+ legacy CSS/JS modules</b> into a reusable component library of 30 components, accelerating team feature deployment velocity by <b>25%</b> and eliminating 300+ lines of duplicate code."))
-    story.append(Spacer(1, 5))
+    # 1. FlyRank AI
+    story.append(entry_header("Front-End AI Engineering Intern", "FlyRank AI", "June 2026 - Present", "Bengaluru, India (Remote)"))
+    story.append(bullet("Selected from 200+ applicants; built and shipped <b>15+ production-ready React web interfaces</b>, accelerating user engagement by <b>35%</b>."))
+    story.append(bullet("Architected 5 AI-driven UI workflows integrating third-party ML APIs, reducing client-side rendering latency by <b>40%</b> and load time from 3.2s to 1.9s."))
+    story.append(bullet("Refactored 20+ legacy modules into a reusable design library of 30 components, speeding feature deployment by <b>25%</b>."))
+    story.append(Spacer(1, 1.5))
 
-    # DSCE ERP
-    story.append(Paragraph("Lead Developer &nbsp;&mdash;&nbsp; <font color='#1D4ED8'>DSCE ERP Management System</font>", job_title_style))
-    story.append(Paragraph("Academic Year 2025 &ndash; 2026 &nbsp;|&nbsp; DSCE Bengaluru", meta_style))
-    story.append(Spacer(1, 3))
-    story.append(bullet("Architected and delivered a full-stack mini-project management platform serving <b>500+ engineering students</b> and <b>30+ faculty</b> using React, FastAPI, and Firestore — reducing project registration time by <b>60%</b>."))
-    story.append(bullet("Built an automated guide allocation algorithm that matched <b>200+ student projects to guides in under 2 seconds</b>, eliminating 100% of manual scheduling conflicts and saving <b>40+ administrative hours</b> per semester."))
-    story.append(bullet("Implemented token-bucket rate-limiting middleware and role-based access control (RBAC), sustaining <b>99.9% uptime</b> across <b>10,000+ monthly requests</b> with zero security incidents."))
+    # 2. GEMA Education Technology
+    story.append(entry_header("WordPress Developer Intern", "GEMA Education Technology Pvt. Ltd.", "July 2026 - Oct 2026", "Dubai, UAE (Remote | via Internshala)"))
+    story.append(bullet("Designed, developed, and maintained custom WordPress platforms and educational portals for an international EdTech organization."))
+    story.append(bullet("Implemented tailored themes and custom PHP/JS plugins to support dynamic business requirements; improved site navigation structure."))
+    story.append(bullet("Optimized Core Web Vitals and site asset caching, resolving 15+ cross-browser rendering issues and reducing page bounce rates."))
+    story.append(Spacer(1, 1.5))
 
-    # ── KEY PROJECTS ──────────────────────────────────────────────────────────
+    # 3. InAmigos Foundation
+    story.append(entry_header("AI Web Development Intern", "InAmigos Foundation", "July 2026 - Aug 2026", "Remote (via Internshala)"))
+    story.append(bullet("Engineered responsive, accessible web pages and digital initiatives for a CSR-registered non-profit organization using HTML5/CSS3/JS."))
+    story.append(bullet("Integrated AI-assisted UI elements and streamlined interactive workflows, achieving 100% on-time milestone delivery across sprints."))
+    story.append(Spacer(1, 1.5))
+
+    # 4. DSCE ERP Management System
+    story.append(entry_header("Lead Full-Stack Developer", "DSCE ERP Management System", "Academic Year 2025 - 2026", "DSCE Bengaluru, India"))
+    story.append(bullet("Architected a full-stack mini-project portal serving <b>500+ students and 30+ faculty</b> using React, FastAPI, and Firestore - cutting registration time by <b>60%</b>."))
+    story.append(bullet("Engineered automated guide allocation matching <b>200+ projects in under 2 seconds</b>, eliminating manual scheduling conflicts and saving <b>40+ admin hours</b>."))
+    story.append(bullet("Implemented token-bucket rate limiting and RBAC authentication, maintaining <b>99.9% uptime</b> across 10,000+ monthly requests."))
+
+    # ── KEY PROJECTS & ACHIEVEMENTS ───────────────────────────────────────────
     story.extend(section("Key Projects & Achievements"))
 
     # Hackathon
-    story.append(Paragraph("National Agriculture Tech Solution &nbsp;&mdash;&nbsp; <font color='#1D4ED8'>Team Lead (Alpha_Coders)</font>", job_title_style))
-    story.append(Paragraph("Jan 2026 &nbsp;|&nbsp; IBM & ACM Co-sponsored National Hackathon &nbsp;|&nbsp; 36-Hour Event", meta_style))
-    story.append(Spacer(1, 3))
-    story.append(bullet("Led a <b>4-person developer team</b> to design, build, and demo an automated IoT/AI crop-health monitoring platform entirely within a <b>36-hour hackathon</b> window."))
-    story.append(bullet("Ranked in the <b>Top 37 National Finalists (Top 1.5%)</b> out of <b>2,500+ competing developer teams</b> across all states of India, co-judged by IBM and ACM."))
-    story.append(bullet("Developed 3 real-time telemetry dashboards processing crop sensor streams for <b>100+ simulated agricultural fields</b>, with sub-500ms data refresh rates."))
-    story.append(Spacer(1, 5))
+    story.append(entry_header("National Agriculture Tech Solution (Team Alpha_Coders)", "National Hackathon", "Jan 2026", "Jain University & IBM / ACM Co-sponsored"))
+    story.append(bullet("Ranked in the <b>Top 37 National Finalists (Top 1.5%) out of 2,500+ teams</b> across India in a competitive 36-hour hackathon co-judged by IBM and ACM."))
+    story.append(bullet("Built an automated IoT/AI crop-health monitoring platform with sub-500ms real-time telemetry dashboards across 100+ simulated agricultural fields."))
+    story.append(Spacer(1, 1.5))
 
     # Open Source
-    story.append(Paragraph("Open Source Contributions & Web Applications &nbsp;&mdash;&nbsp; <font color='#1D4ED8'>Developer</font>", job_title_style))
-    story.append(Paragraph("2024 &ndash; Present &nbsp;|&nbsp; github.com/arunkumarmeda27", meta_style))
-    story.append(Spacer(1, 3))
-    story.append(bullet("Authored and maintain <b>10+ public GitHub repositories</b> with <b>100+ commits</b> and 95%+ documentation coverage, consistently maintaining code quality scores above 90/100."))
-    story.append(bullet("Optimized critical rendering paths and asset bundle sizes across 3 web projects, improving <b>Google Lighthouse Performance scores from 72 to 98/100</b> — a 36-point gain."))
+    story.append(entry_header("Open Source Contributions & Web Engineering", "Developer", "2024 - Present", "github.com/arunkumarmeda27"))
+    story.append(bullet("Maintained 10+ public GitHub repositories; optimized critical rendering paths across web apps, elevating Google Lighthouse scores to <b>98/100</b>."))
 
     # ── EDUCATION ─────────────────────────────────────────────────────────────
     story.extend(section("Education"))
-    story.append(Paragraph("Bachelor of Engineering (B.E.) in Information Science & Engineering (ISE)", job_title_style))
-    story.append(Paragraph("Dayananda Sagar College of Engineering (DSCE), Bengaluru &nbsp;|&nbsp; 2024 &ndash; Present", meta_style))
-    story.append(Spacer(1, 3))
-    story.append(Paragraph(
-        "<b>Relevant Coursework:</b> Data Structures & Algorithms, Object-Oriented Programming (C++/Java), "
-        "Database Management Systems, Web Engineering, Operating Systems, Computer Networks.",
-        body_style
-    ))
+    story.append(entry_header("B.E. in Information Science & Engineering (ISE)", "Dayananda Sagar College of Engineering", "2024 - Present", "Bengaluru, India"))
+    story.append(Paragraph("<b>Relevant Coursework:</b> Data Structures & Algorithms, Object-Oriented Programming (C++/Java), Database Management Systems, Web Engineering, Operating Systems, Computer Networks", body_style))
 
     # ── CERTIFICATIONS & HONORS ───────────────────────────────────────────────
     story.extend(section("Certifications & Honors"))
-    story.append(bullet("<b>Top 37 National Finalist (Top 1.5%)</b> — Tech For Agriculture National Hackathon, co-sponsored by IBM & ACM (Jan 2026)"))
-    story.append(bullet("<b>Mastering C & C++ Programming</b> — Udemy Certified (Jan 2025)"))
+    story.append(bullet("<b>Top 37 National Finalist (Top 1.5%)</b> - Tech For Agriculture National Hackathon, co-sponsored by IBM & ACM (Jan 2026)"))
+    story.append(bullet("<b>Mastering C & C++ Programming: From Fundamentals to Advanced</b> - Udemy Certified (Jan 2025)"))
+    story.append(bullet("<b>Responsive Web Design Certification</b> - freeCodeCamp Certified (2026)"))
 
     doc.build(story)
+    reader = pypdf.PdfReader(output_path)
     print(f"ATS-optimised single-column resume generated at: {output_path}")
+    print(f"Total Pages: {len(reader.pages)}")
 
 if __name__ == "__main__":
     generate_ats_resume()

@@ -498,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const body = encodeURIComponent(`Name: ${senderName}\nEmail: ${senderEmail}\n\nMessage:\n${senderMsg}`);
         
         setTimeout(() => {
-          window.location.href = `mailto:medaarun390@gmail.com?subject=${subject}&body=${body}`;
+          window.location.href = `mailto:arunkumarmeda27@gmail.com?subject=${subject}&body=${body}`;
         }, 1000);
       }, 1000);
     });
