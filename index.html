@@ -2,598 +2,491 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arun Kumar Meda | Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arun Kumar Meda | Software Engineer & AI Intern</title>
   <meta name="description"
-    content="Portfolio of Arun Kumar Meda - Software Engineer & Open Source Contributor. View my projects, skills, and contact info.">
+    content="Portfolio of Arun Kumar Meda - Software Engineer & Front-End AI Engineering Intern. Mastered Python, React, JavaScript, C++, and open source contribution." />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 
-  <!-- FontAwesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- FontAwesome 6 for Clean Professional Icons (Zero Emojis) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css?v=2.0">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- Particle Background Canvas -->
-  <canvas id="particle-canvas"></canvas>
+  <!-- Ambient Glow Background -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-bottom"></div>
 
-  <!-- Ambient Glow Orbs -->
-  <div class="glow-orb orb-1"></div>
-  <div class="glow-orb orb-2"></div>
+  <!-- Background Particle Network -->
+  <canvas id="particleCanvas" class="particle-canvas"></canvas>
 
-  <!-- Navigation Bar -->
+  <!-- ============================================================
+       NAVIGATION BAR
+       ============================================================ -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="#" class="nav-logo" id="nav-logo">AKM.dev</a>
+      <a href="#hero" class="nav-logo" id="nav-logo">
+        <span class="logo-accent">&lt;</span>AKM<span class="logo-accent">.dev /&gt;</span>
+      </a>
+
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
         <span class="hamburger-bar"></span>
       </button>
+
       <ul class="nav-menu" id="nav-menu">
-        <li><a href="#hero" class="nav-link active" id="link-hero">Home</a></li>
-        <li><a href="#about" class="nav-link" id="link-about">About</a></li>
-        <li><a href="#internships" class="nav-link" id="link-internships">Internships</a></li>
-        <li><a href="#timeline" class="nav-link" id="link-timeline">Journey</a></li>
-        <li><a href="#skills" class="nav-link" id="link-skills">Skills</a></li>
-        <li><a href="#projects" class="nav-link" id="link-projects">Projects</a></li>
-        <li><a href="#contact" class="nav-link" id="link-contact">Contact</a></li>
-        <li><a href="resume.pdf" target="_blank" class="nav-link nav-resume-btn" id="link-resume"><i class="fa-solid fa-file-arrow-down"></i> Resume</a></li>
+        <li><a href="#hero" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="#tech-globe" class="nav-link"><i class="fa-solid fa-earth-americas"></i> 3D Globe</a></li>
+        <li><a href="#internships" class="nav-link"><i class="fa-solid fa-briefcase"></i> Internships</a></li>
+        <li><a href="#skills" class="nav-link"><i class="fa-solid fa-code"></i> Skills</a></li>
+        <li><a href="#projects" class="nav-link"><i class="fa-solid fa-folder-tree"></i> Projects</a></li>
+        <li><a href="#credentials" class="nav-link"><i class="fa-solid fa-award"></i> Credentials</a></li>
+        <li><a href="#contact" class="nav-link"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+        <li>
+          <a href="resume.pdf" target="_blank" class="nav-link nav-resume-btn" id="nav-resume">
+            <i class="fa-solid fa-file-arrow-down"></i> Resume
+          </a>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- ============================================================
+       HERO SECTION WITH 3D FLIP PHOTO CARD
+       ============================================================ -->
   <header class="section hero" id="hero">
-    <div class="hero-grid">
+    <div class="container hero-grid">
+
+      <!-- Left Column: Introduction & Actions -->
       <div class="hero-content">
         <div class="status-pill">
-          <span class="pulse-dot"></span> OPEN FOR FRONT-END & FULL-STACK ROLES
+          <span class="pulse-dot"></span> OPEN FOR FRONT-END &amp; FULL-STACK ROLES
         </div>
-        <h1 class="hero-title">Hi, I'm <span class="highlight">Arun Kumar Meda</span></h1>
-        <p class="hero-subtitle">
-          I build high-quality software & contribute to
-          <span class="animated-text" id="animated-text">Open Source</span>
+
+        <h1 class="hero-title">
+          Hi, I'm <span class="gradient-text">Arun Kumar Meda</span>
+        </h1>
+
+        <div class="hero-subtitle">
+          <span>Specialized in </span>
+          <span class="typed-text" id="typed-text"></span>
+          <span class="type-caret">|</span>
+        </div>
+
+        <p class="hero-desc">
+          Front-End AI Engineering Intern at <strong>FlyRank AI</strong>. Crafting high-performance web applications,
+          AI interfaces, and contributing to open-source software with modern frontend architectures.
         </p>
+
         <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary" id="btn-view-work">View My Work</a>
-          <a href="resume.pdf" target="_blank" class="btn btn-secondary btn-glow-resume" id="btn-view-resume"><i class="fa-solid fa-file-pdf"></i> Resume</a>
-          <a href="#contact" class="btn btn-secondary" id="btn-get-in-touch">Let's Connect</a>
+          <a href="#projects" class="btn btn-primary">
+            <i class="fa-solid fa-code-fork"></i> View My Work
+          </a>
+          <a href="resume.pdf" target="_blank" class="btn btn-secondary btn-glow-resume">
+            <i class="fa-solid fa-file-pdf"></i> Resume
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i class="fa-solid fa-paper-plane"></i> Let's Connect
+          </a>
+        </div>
+
+        <!-- Quick Social Links -->
+        <div class="hero-socials">
+          <a href="https://github.com/arunkumarmeda27" target="_blank" class="social-icon" title="GitHub" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/arun-kumar-meda-557b051b8" target="_blank" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="mailto:arunkumarmeda27@gmail.com" class="social-icon" title="Email" aria-label="Email">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+          <button class="social-icon copy-quick-email" id="quick-copy-email" title="Copy Email" aria-label="Copy Email">
+            <i class="fa-regular fa-copy"></i>
+          </button>
         </div>
       </div>
-      <div class="hero-avatar-container">
-        <img src="" id="github-avatar" class="avatar-glow" alt="Arun Kumar Meda" style="display: none;">
-        <div class="hero-code-editor card glass-card">
-          <div class="editor-header">
-            <div class="editor-dots">
+
+      <!-- Right Column: 3D Flip Card (Photo Front -> Contact Details Back) -->
+      <div class="hero-card-column">
+        <div class="flip-card-wrapper" id="photoFlipCard" title="Click to flip card">
+          <div class="flip-card-inner" id="flipCardInner">
+
+            <!-- ── FRONT FACE: PHOTO ── -->
+            <div class="flip-card-face flip-card-front">
+              <div class="card-status-badge">
+                <span class="pulse-dot"></span> Available
+              </div>
+
+              <div class="photo-container">
+                <img src="https://unavatar.io/linkedin/arun-kumar-meda-557b051b8"
+                     id="github-avatar"
+                     alt="Arun Kumar Meda"
+                     class="profile-img" />
+                <div class="photo-overlay"></div>
+              </div>
+
+              <div class="front-card-info">
+                <h3 class="front-name">Arun Kumar Meda</h3>
+                <p class="front-role">Front-End AI Engineering Intern</p>
+                <p class="front-company"><i class="fa-solid fa-building"></i> FlyRank AI</p>
+              </div>
+
+              <div class="flip-hint-pill">
+                <i class="fa-solid fa-rotate"></i> Flip for Contact Details
+              </div>
+            </div>
+
+            <!-- ── BACK FACE: CONTACT DETAILS ── -->
+            <div class="flip-card-face flip-card-back">
+              <div class="back-card-header">
+                <div class="back-icon-circle">
+                  <i class="fa-solid fa-address-card"></i>
+                </div>
+                <h3 class="back-title">Get In Touch</h3>
+                <p class="back-subtitle">Reach out for opportunities or collaboration</p>
+              </div>
+
+              <div class="back-contact-list">
+                <div class="back-contact-item">
+                  <i class="fa-solid fa-envelope back-item-icon"></i>
+                  <div class="back-item-text">
+                    <span class="back-item-label">Direct Email</span>
+                    <a href="mailto:arunkumarmeda27@gmail.com" class="back-item-val">arunkumarmeda27@gmail.com</a>
+                  </div>
+                </div>
+
+                <div class="back-contact-item">
+                  <i class="fa-solid fa-location-dot back-item-icon"></i>
+                  <div class="back-item-text">
+                    <span class="back-item-label">Location</span>
+                    <span class="back-item-val">Bangalore, India</span>
+                  </div>
+                </div>
+
+                <div class="back-contact-item">
+                  <i class="fa-solid fa-graduation-cap back-item-icon"></i>
+                  <div class="back-item-text">
+                    <span class="back-item-label">Education</span>
+                    <span class="back-item-val">B.E. ISE @ DSCE</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Action Buttons -->
+              <div class="back-action-grid">
+                <a href="mailto:arunkumarmeda27@gmail.com" class="btn btn-primary btn-sm">
+                  <i class="fa-solid fa-paper-plane"></i> Send Email
+                </a>
+                <button class="btn btn-secondary btn-sm" id="card-copy-email-btn">
+                  <i class="fa-regular fa-copy"></i> Copy Email
+                </button>
+                <a href="https://www.linkedin.com/in/arun-kumar-meda-557b051b8" target="_blank" class="btn btn-secondary btn-sm">
+                  <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/arunkumarmeda27" target="_blank" class="btn btn-secondary btn-sm">
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+              </div>
+
+              <div class="flip-hint-pill back-flip-hint">
+                <i class="fa-solid fa-rotate-left"></i> Flip back to Photo
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================
+       3D TECH GLOBE SECTION (Displaying Mastered Tech: Python, etc.)
+       ============================================================ -->
+  <section class="section tech-globe-section" id="tech-globe">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-earth-americas"></i> 3D TECH COSMOS</span>
+        <h2 class="section-title">Mastered Technologies</h2>
+        <p class="section-desc">
+          Drag and spin the 3D globe to explore the core technologies, languages, and tools I have mastered.
+        </p>
+      </div>
+
+      <div class="globe-display-container">
+        <!-- 3D Three.js Globe Stage -->
+        <div class="globe-viewport" id="globeViewport">
+          <canvas id="globeCanvas"></canvas>
+          <div class="globe-orbital-ring orbit-a"></div>
+          <div class="globe-orbital-ring orbit-b"></div>
+          <div class="globe-overlay-tech" id="globeTechOverlay"></div>
+        </div>
+
+        <!-- Interactive Legend / Filter Chips -->
+        <div class="globe-controls-bar">
+          <div class="globe-drag-hint">
+            <i class="fa-solid fa-hand-pointer"></i> Click &amp; drag anywhere to rotate globe in 3D
+          </div>
+          <div class="mastered-chips" id="masteredTechChips"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       INTERNSHIPS SECTION (FlyRank, InAmigos, GEMA)
+       ============================================================ -->
+  <section class="section internships" id="internships">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-briefcase"></i> EXPERIENCE</span>
+        <h2 class="section-title">Professional Internships</h2>
+        <p class="section-desc">Industry experience building web applications, AI user interfaces, and custom CMS platforms.</p>
+      </div>
+
+      <div class="internships-list" id="internships-container">
+        <!-- Dynamically rendered via data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SKILLS BREAKDOWN SECTION
+       ============================================================ -->
+  <section class="section skills-section" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-code"></i> PROFICIENCY</span>
+        <h2 class="section-title">Technical Expertise</h2>
+        <p class="section-desc">Categorized breakdown of development capabilities and proficiency levels.</p>
+      </div>
+
+      <div class="skills-grid" id="skills-grid">
+        <!-- Dynamically populated from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GITHUB PROJECTS SECTION
+       ============================================================ -->
+  <section class="section projects-section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-folder-tree"></i> OPEN SOURCE</span>
+        <h2 class="section-title">Featured Projects &amp; Repositories</h2>
+        <p class="section-desc">Live synced GitHub repositories, applications, and hackathon prototypes.</p>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="project-toolbar">
+        <div class="project-search-wrapper">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="projectSearchInput" class="project-search-input"
+                 placeholder="Search repositories by name, language, or topic..." />
+        </div>
+        <div class="project-filter-tabs" id="projectFilterTabs">
+          <button class="filter-tab active" data-lang="all">All</button>
+          <button class="filter-tab" data-lang="JavaScript">JavaScript</button>
+          <button class="filter-tab" data-lang="Python">Python</button>
+          <button class="filter-tab" data-lang="C++">C++</button>
+          <button class="filter-tab" data-lang="HTML">HTML/CSS</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projectsGrid">
+        <div class="loading-state">
+          <i class="fa-solid fa-circle-notch fa-spin"></i> Loading repositories from GitHub...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CREDENTIALS & HACKATHONS SECTION
+       ============================================================ -->
+  <section class="section credentials-section" id="credentials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fa-solid fa-award"></i> RECOGNITION</span>
+        <h2 class="section-title">Certifications &amp; Hackathons</h2>
+      </div>
+
+      <div class="credentials-grid">
+        <!-- Certifications List -->
+        <div class="credential-box glass-card">
+          <h3 class="credential-box-title">
+            <i class="fa-solid fa-certificate"></i> Verified Certifications
+          </h3>
+          <div class="credential-items" id="certificationsList"></div>
+        </div>
+
+        <!-- Hackathons List -->
+        <div class="credential-box glass-card">
+          <h3 class="credential-box-title">
+            <i class="fa-solid fa-trophy"></i> Hackathon Achievements
+          </h3>
+          <div class="credential-items" id="hackathonsList"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT SECTION WITH CODE-SESSION TRANSMISSION
+       ============================================================ -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag"><i class="fa-solid fa-paper-plane"></i> TRANSMISSION</span>
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-desc">Open for discussions, frontend engineering roles, or innovative software projects.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Left: Quick Direct Channels Card -->
+        <div class="glass-card contact-channel-card">
+          <h3 class="channel-title">
+            <i class="fa-solid fa-link"></i> Direct Channels
+          </h3>
+          <p class="channel-desc">
+            Feel free to email me directly or connect on LinkedIn and GitHub. I respond within 24 hours.
+          </p>
+
+          <div class="channel-list">
+            <a href="mailto:arunkumarmeda27@gmail.com" class="channel-item">
+              <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="channel-info">
+                <span class="channel-label">Email Address</span>
+                <span class="channel-val">arunkumarmeda27@gmail.com</span>
+              </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/arun-kumar-meda-557b051b8" target="_blank" class="channel-item">
+              <div class="channel-icon"><i class="fa-brands fa-linkedin"></i></div>
+              <div class="channel-info">
+                <span class="channel-label">LinkedIn</span>
+                <span class="channel-val">arun-kumar-meda-557b051b8</span>
+              </div>
+            </a>
+
+            <a href="https://github.com/arunkumarmeda27" target="_blank" class="channel-item">
+              <div class="channel-icon"><i class="fa-brands fa-github"></i></div>
+              <div class="channel-info">
+                <span class="channel-label">GitHub</span>
+                <span class="channel-val">arunkumarmeda27</span>
+              </div>
+            </a>
+
+            <div class="channel-item">
+              <div class="channel-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="channel-info">
+                <span class="channel-label">Location</span>
+                <span class="channel-val">Bangalore, India</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="copy-box">
+            <button class="btn btn-secondary btn-block" id="copyEmailBtn" data-email="arunkumarmeda27@gmail.com">
+              <i class="fa-regular fa-copy"></i> Copy Email Address
+            </button>
+            <span class="tooltip" id="emailTooltip">Copied to clipboard!</span>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Code Editor Form -->
+        <div class="glass-card contact-editor-card">
+          <div class="editor-titlebar">
+            <div class="window-dots">
               <span class="dot red"></span>
               <span class="dot yellow"></span>
               <span class="dot green"></span>
             </div>
-            <div class="editor-tabs">
-              <button class="editor-tab active" data-tab="dev"><i class="fa-brands fa-js" style="color: #f7df1e;"></i> developer.js</button>
-              <button class="editor-tab" data-tab="stack"><i class="fa-solid fa-layer-group" style="color: #38bdf8;"></i> stack.config</button>
-            </div>
+            <span class="editor-filename">
+              <i class="fa-brands fa-js" style="color: #f7df1e;"></i> contact_session.js
+            </span>
           </div>
-          <div class="editor-body">
-            <div class="tab-content active" id="tab-dev">
-<pre><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
-  <span class="code-prop">name</span>: <span class="code-string">'Arun Kumar Meda'</span>,
-  <span class="code-prop">role</span>: <span class="code-string">'Front-End AI Engineering Intern'</span>,
-  <span class="code-prop">company</span>: <span class="code-string">'FlyRank AI'</span>,
-  <span class="code-prop">education</span>: <span class="code-string">'B.E. ISE @ DSCE'</span>,
-  <span class="code-prop">skills</span>: [<span class="code-string">'JavaScript'</span>, <span class="code-string">'Python'</span>, <span class="code-string">'React'</span>, <span class="code-string">'C++'</span>],
-  <span class="code-prop">status</span>: <span class="code-string">'Building smart, high-performance web UIs'</span>
-};</code></pre>
-            </div>
-            <div class="tab-content" id="tab-stack" style="display: none;">
-<pre><code><span class="code-prop">[core_environment]</span>
-<span class="code-variable">frontend</span> = <span class="code-string">"HTML5, CSS3, JavaScript, React"</span>
-<span class="code-variable">backend</span>  = <span class="code-string">"Python, Node.js, FastAPI"</span>
-<span class="code-variable">database</span> = <span class="code-string">"Firestore, MongoDB"</span>
-<span class="code-variable">tooling</span>  = <span class="code-string">"Git, GitHub, VS Code, Linux"</span></code></pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
 
-  <!-- About Section -->
-  <section class="section about" id="about">
-    <div class="card glass-card">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            I am an enthusiastic software engineer driven by a passion for building clean, user-centric web applications
-            and contributing to the global developer ecosystem.
-          </p>
-          <p>
-            I love learning new technologies, refining my coding practices, and collaborating on projects that make a
-            meaningful impact.
-          </p>
-        </div>
-        <div class="about-details">
-          <div class="detail-item">
-            <span class="detail-label"><i class="fa-solid fa-location-dot"></i> Location:</span>
-            <span class="detail-value">India</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label"><i class="fa-solid fa-code-branch"></i> Open Source:</span>
-            <span class="detail-value">Active Contributor</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label"><i class="fa-solid fa-envelope"></i> Email:</span>
-            <span class="detail-value">arunkumarmeda27@gmail.com</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label"><i class="fa-solid fa-file-pdf"></i> Resume:</span>
-            <span class="detail-value"><a href="resume.pdf" target="_blank" class="resume-link">View Resume (PDF) <i class="fa-solid fa-arrow-up-right-from-square"></i></a></span>
-          </div>
-        </div>
-      </div>
+          <form class="code-form" id="contactForm">
+            <div class="code-line"><span class="c-keyword">async function</span> <span class="c-func">transmitMessage</span>() {</div>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">Top 37</div>
-          <div class="stat-label">National Hackathon Finalist</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">FlyRank AI</div>
-          <div class="stat-label">Front-End AI Intern</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">InAmigos</div>
-          <div class="stat-label">AI Web Dev Intern</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">GEMA</div>
-          <div class="stat-label">WordPress Dev Intern</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">Active</div>
-          <div class="stat-label">Open Source Contributor</div>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="form-row-code">
+              <span class="c-const">const</span> <span class="c-var">sender</span> =
+              <input type="text" id="senderName" class="code-input" placeholder="'Your Name'" required />
+            </div>
 
-  <!-- Internships Section -->
-  <section class="section internships" id="internships">
-    <div class="card glass-card">
-      <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Internships</h2>
-      <div class="internships-list">
-        <!-- FlyRank AI Internship -->
-        <div class="internship-item" id="internship-flyrank">
-          <div class="internship-header">
-            <div class="internship-title-group">
-              <h3 class="internship-role">Front-End AI Engineering Intern</h3>
-              <div class="internship-company">
-                <a href="https://flyrank.ai" target="_blank" class="company-link">FlyRank AI <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem;"></i></a>
-              </div>
+            <div class="form-row-code">
+              <span class="c-const">const</span> <span class="c-var">email</span> =
+              <input type="email" id="senderEmail" class="code-input" placeholder="'your.email@example.com'" required />
             </div>
-            <div class="internship-meta">
-              <span class="internship-date"><i class="fa-solid fa-calendar-days"></i> June 2026 – Present</span>
-              <span class="internship-duration"><i class="fa-solid fa-clock"></i> 12 weeks</span>
+
+            <div class="form-row-code code-textarea-row">
+              <span class="c-const">const</span> <span class="c-var">message</span> =
+              <textarea id="senderMsg" class="code-input code-textarea" rows="3"
+                        placeholder="'Your project inquiry or message here...'" required></textarea>
             </div>
-          </div>
-          <ul class="internship-details">
-            <li>Accepted into the <strong>FlyRank AI</strong> Internship program to design and build premium, high-performance web interfaces powered by AI.</li>
-            <li>Collaborating on integrating artificial intelligence features into user-centric frontend experiences using React and modern JS.</li>
-            <li>Utilizing modern frontend technologies and design patterns to build responsive, accessible, and high-performance web pages.</li>
-          </ul>
-          <div class="internship-tech-tags">
-            <span class="tech-tag"><i class="fa-brands fa-react"></i> React</span>
-            <span class="tech-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
-            <span class="tech-tag"><i class="fa-solid fa-robot"></i> AI Integration</span>
-            <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
-            <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
-            <span class="tech-tag"><i class="fa-solid fa-mobile-screen"></i> Responsive UI</span>
-          </div>
-          <div class="internship-actions">
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['flyrank_offer_letter.png'], 'FlyRank AI — Internship Offer Letter')">
-              <i class="fa-solid fa-file-contract"></i> View Offer Letter
+
+            <div class="code-line"><span class="c-keyword">return await</span> <span class="c-var">network</span>.<span class="c-func">send</span>({ sender, email, message });</div>
+            <div class="code-line">}</div>
+
+            <button type="submit" class="btn btn-primary btn-submit-code" id="btnSubmitCode">
+              <i class="fa-solid fa-paper-plane"></i> Execute Transmission
             </button>
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['flyrank_poster.png'], 'FlyRank AI — Internship Joining Announcement')">
-              <i class="fa-solid fa-image"></i> View Announcement Poster
-            </button>
-          </div>
-        </div>
-        <!-- InAmigos Foundation Internship -->
-        <div class="internship-item" id="internship-inamigos">
-          <div class="internship-header">
-            <div class="internship-title-group">
-              <h3 class="internship-role">Web Developer Intern</h3>
-              <div class="internship-company">
-                <a href="https://inamigosfoundation.org.in" target="_blank" class="company-link">InAmigos Foundation <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem;"></i></a>
-              </div>
-            </div>
-            <div class="internship-meta">
-              <span class="internship-date"><i class="fa-solid fa-calendar-days"></i> 28 Jul – 10 Aug 2026</span>
-              <span class="internship-duration"><i class="fa-solid fa-clock"></i> ~2 weeks</span>
-              <span class="internship-source"><i class="fa-solid fa-link"></i> Via Internshala</span>
-            </div>
-          </div>
-          <ul class="internship-details">
-            <li>Offered and accepted the <strong>Web Developer</strong> internship position at InAmigos Foundation (Reg: U85300CT2020NPL010641) — a CSR-registered NGO — through Internshala.</li>
-            <li>Responsible for web development tasks aligned with the foundation's digital presence; attended team meetings and contributed to group activities.</li>
-            <li>Worked with flexible, remote hours; completed all tasks assigned by supervisors in a timely and efficient manner with utmost care.</li>
-            <li>Maintained strict confidentiality of foundation data and ensured all deliverables adhered to InAmigos' policies and procedures.</li>
-          </ul>
-          <div class="internship-tech-tags">
-            <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
-            <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
-            <span class="tech-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
-            <span class="tech-tag"><i class="fa-solid fa-globe"></i> Web Dev</span>
-            <span class="tech-tag"><i class="fa-solid fa-wifi"></i> Remote Work</span>
-            <span class="tech-tag"><i class="fa-solid fa-handshake-angle"></i> NGO / CSR</span>
-          </div>
-          <div class="internship-actions">
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['inamigos_offer_letter_p1.png','inamigos_offer_letter_p2.png'], 'InAmigos Foundation — Web Developer Internship Offer Letter')">
-              <i class="fa-solid fa-file-contract"></i> View Offer Letter <span class="doc-pages">2 pages</span>
-            </button>
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['inamigos_selection_letter.png'], 'InAmigos Foundation — Web Developer Internship Selection Letter')">
-              <i class="fa-solid fa-certificate"></i> View Selection Letter
-            </button>
-          </div>
-        </div>
-
-        <!-- GEMA Education Technology Internship -->
-        <div class="internship-item" id="internship-gema">
-          <div class="internship-header">
-            <div class="internship-title-group">
-              <h3 class="internship-role">WordPress Developer Intern</h3>
-              <div class="internship-company">
-                <a href="https://www.gemadubai.com" target="_blank" class="company-link">GEMA Education Technology Pvt. Ltd. <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem;"></i></a>
-              </div>
-            </div>
-            <div class="internship-meta">
-              <span class="internship-date"><i class="fa-solid fa-calendar-days"></i> July 2026 – Oct 2026</span>
-              <span class="internship-duration"><i class="fa-solid fa-clock"></i> 3 months</span>
-              <span class="internship-source"><i class="fa-solid fa-link"></i> Via Internshala</span>
-            </div>
-          </div>
-          <ul class="internship-details">
-            <li>Recruited as a <strong>WordPress Developer Intern</strong> at GEMA Education Technology, a Dubai-based EdTech start-up, through Internshala — selected from Dayananda Sagar College of Engineering, Bangalore.</li>
-            <li>Responsible for designing, developing, and managing WordPress websites with custom themes and plugins to meet specific project requirements.</li>
-            <li>Focused on performance optimization — improving website speed, load times, and overall user experience across all platforms.</li>
-            <li>Collaborating remotely with the team (Mentor: Eshaan Manchanda) to troubleshoot bugs, meet project deadlines, and deliver high-quality web solutions.</li>
-            <li>Provided a monthly stipend of ₹1,000 with regular mentor check-ins to track internship progress and learning outcomes.</li>
-          </ul>
-          <div class="internship-tech-tags">
-            <span class="tech-tag"><i class="fa-brands fa-wordpress"></i> WordPress</span>
-            <span class="tech-tag"><i class="fa-solid fa-palette"></i> Theme Dev</span>
-            <span class="tech-tag"><i class="fa-solid fa-plug"></i> Plugin Dev</span>
-            <span class="tech-tag"><i class="fa-solid fa-gauge-high"></i> Performance</span>
-            <span class="tech-tag"><i class="fa-solid fa-bug"></i> Bug Fixing</span>
-          </div>
-          <div class="internship-actions">
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['gema_offer_letter_p1.png','gema_offer_letter_p2.png','gema_offer_letter_p3.png'], 'GEMA Education Technology — WordPress Developer Intern Offer Letter')">
-              <i class="fa-solid fa-file-contract"></i> View Offer Letter <span class="doc-pages">3 pages</span>
-            </button>
-            <button class="btn btn-secondary btn-sm" onclick="window.openMediaModal(['gema_selection_letter.png'], 'GEMA Education Technology — Certificate of Selection (Internshala)')">
-              <i class="fa-solid fa-certificate"></i> View Selection Certificate
-            </button>
-          </div>
+            <div class="terminal-status" id="terminalStatus"></div>
+          </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Timeline Section -->
-  <section class="section timeline" id="timeline">
-    <div class="card glass-card">
-      <h2 class="section-title text-center">My Journey</h2>
-      <div class="timeline-container">
-        
-        <!-- Timeline Item: GEMA Education Technology Internship -->
-        <div class="timeline-item left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">July – Oct 2026</span>
-            <h3 class="timeline-title">WordPress Developer Intern</h3>
-            <p class="timeline-org">GEMA Education Technology Pvt. Ltd., Dubai (Remote · via Internshala)</p>
-            <p class="timeline-desc">Selected as a WordPress Developer Intern at GEMA Education Technology — a Dubai-based EdTech start-up. Responsible for full WordPress website development, custom theme & plugin implementation, performance optimization, and bug fixing in a remote, collaborative environment.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item: InAmigos Foundation Internship -->
-        <div class="timeline-item left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">July 2026</span>
-            <h3 class="timeline-title">AI Web Development Intern</h3>
-            <p class="timeline-org">InAmigos Foundation (via Internshala)</p>
-            <p class="timeline-desc">Selected for the AI Web Development internship at InAmigos Foundation through Internshala. Building AI-powered web applications and modern frontend solutions.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 0 (FlyRank AI Internship) -->
-        <div class="timeline-item left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">June 2026 - Present</span>
-            <h3 class="timeline-title">Front-End AI Engineering Intern</h3>
-            <p class="timeline-org">FlyRank AI</p>
-            <p class="timeline-desc">Accepted into the FlyRank AI Internship program to design and build premium web interfaces, integrate AI capabilities, and optimize frontend user experiences.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 1 -->
-        <div class="timeline-item right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">Jan 2026</span>
-            <h3 class="timeline-title">National Hackathon Finalist</h3>
-            <p class="timeline-org">Jain (Deemed-to-be University) & IBM / ACM</p>
-            <p class="timeline-desc">Led Team Alpha_Coders to develop a smart agriculture tech solution. Placed in the top 37 national finalists across India.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 2 -->
-        <div class="timeline-item left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">Academic Year 2025 - 2026</span>
-            <h3 class="timeline-title">Lead Developer - DSCE ERP</h3>
-            <p class="timeline-org">Information Science & Engineering, DSCE</p>
-            <p class="timeline-desc">Built a unified mini-project management system using React, FastAPI, and Firestore with automated guide allocation and rate-limiting security middleware.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 3 -->
-        <div class="timeline-item right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">Jan 2025</span>
-            <h3 class="timeline-title">Mastering C & C++ Programming</h3>
-            <p class="timeline-org">Udemy</p>
-            <p class="timeline-desc">Mastered memory management, object-oriented concepts, and advanced structures in C & C++.</p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 4 -->
-        <div class="timeline-item left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2024 - Present</span>
-            <h3 class="timeline-title">B.E. in Information Science & Engineering</h3>
-            <p class="timeline-org">Dayananda Sagar College of Engineering (DSCE)</p>
-            <p class="timeline-desc">Studying core software engineering concepts, database management systems, algorithms, and system design.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section class="section skills" id="skills">
-    <div class="card glass-card">
-      <h2 class="section-title">My Skills & Tools</h2>
-
-      <div class="circular-skills-container">
-        <div class="circular-skill" data-percent="90">
-          <svg class="progress-ring" width="100" height="100">
-            <circle class="progress-ring-bg" cx="50" cy="50" r="42"/>
-            <circle class="progress-ring-circle" cx="50" cy="50" r="42"/>
-          </svg>
-          <div class="circle-content">
-            <span class="circle-percent">90%</span>
-            <span class="circle-name">JS / Web</span>
-          </div>
-        </div>
-        <div class="circular-skill" data-percent="85">
-          <svg class="progress-ring" width="100" height="100">
-            <circle class="progress-ring-bg" cx="50" cy="50" r="42"/>
-            <circle class="progress-ring-circle" cx="50" cy="50" r="42"/>
-          </svg>
-          <div class="circle-content">
-            <span class="circle-percent">85%</span>
-            <span class="circle-name">C / C++</span>
-          </div>
-        </div>
-        <div class="circular-skill" data-percent="80">
-          <svg class="progress-ring" width="100" height="100">
-            <circle class="progress-ring-bg" cx="50" cy="50" r="42"/>
-            <circle class="progress-ring-circle" cx="50" cy="50" r="42"/>
-          </svg>
-          <div class="circle-content">
-            <span class="circle-percent">80%</span>
-            <span class="circle-name">Python</span>
-          </div>
-        </div>
-        <div class="circular-skill" data-percent="88">
-          <svg class="progress-ring" width="100" height="100">
-            <circle class="progress-ring-bg" cx="50" cy="50" r="42"/>
-            <circle class="progress-ring-circle" cx="50" cy="50" r="42"/>
-          </svg>
-          <div class="circle-content">
-            <span class="circle-percent">88%</span>
-            <span class="circle-name">Git / DevOps</span>
-          </div>
-        </div>
-      </div>
-
-      <h3>Programming Languages</h3>
-      <div class="skills-grid">
-        <div class="skill-badge js-badge" id="skill-js">
-          <img src="https://skillicons.dev/icons?i=js" alt="JavaScript">
-          <span>JavaScript</span>
-        </div>
-        <div class="skill-badge html-badge" id="skill-html">
-          <img src="https://skillicons.dev/icons?i=html" alt="HTML5">
-          <span>HTML5</span>
-        </div>
-        <div class="skill-badge css-badge" id="skill-css">
-          <img src="https://skillicons.dev/icons?i=css" alt="CSS3">
-          <span>CSS3</span>
-        </div>
-        <div class="skill-badge python-badge" id="skill-python">
-          <img src="https://skillicons.dev/icons?i=python" alt="Python">
-          <span>Python</span>
-        </div>
-      </div>
-
-      <h3 class="tools-header">Tools & Workflows</h3>
-      <div class="skills-grid">
-        <div class="skill-badge git-badge" id="skill-git">
-          <img src="https://skillicons.dev/icons?i=git" alt="Git">
-          <span>Git</span>
-        </div>
-        <div class="skill-badge github-badge" id="skill-github">
-          <img src="https://skillicons.dev/icons?i=github" alt="GitHub">
-          <span>GitHub</span>
-        </div>
-        <div class="skill-badge vscode-badge" id="skill-vscode">
-          <img src="https://skillicons.dev/icons?i=vscode" alt="VS Code">
-          <span>VS Code</span>
-        </div>
-        <div class="skill-badge node-badge" id="skill-nodejs">
-          <img src="https://skillicons.dev/icons?i=nodejs" alt="Node.js">
-          <span>Node.js</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="section projects" id="projects">
-    <h2 class="section-title text-center">Featured Projects</h2>
-
-    <div class="project-search-container">
-      <i class="fa-solid fa-magnifying-glass search-icon"></i>
-      <input type="text" id="project-search" class="project-search-input" placeholder="Search projects by name, language, or keyword...">
-    </div>
-
-    <div class="project-filters" id="project-filters">
-      <button class="filter-btn active" data-filter="all">All Projects</button>
-      <button class="filter-btn" data-filter="featured">Featured</button>
-      <button class="filter-btn" data-filter="web">Web & AI</button>
-      <button class="filter-btn" data-filter="hackathon">Hackathons</button>
-    </div>
-
-    <div class="projects-grid" id="github-projects-grid">
-      <!-- Dynamically Loaded via GitHub API -->
-      <div class="loading-spinner">Loading projects from GitHub...</div>
-    </div>
-  </section>
-
-  <!-- Certifications and Hackathons Section -->
-  <section class="section credentials" id="credentials">
-    <div class="credentials-grid">
-      <!-- Certifications -->
-      <div class="card glass-card">
-        <h2 class="section-title"><i class="fa-solid fa-award"></i> Certifications</h2>
-        <div class="credentials-list" id="certifications-list">
-          <!-- Dynamically Loaded from data.json -->
-        </div>
-      </div>
-      <!-- Hackathons -->
-      <div class="card glass-card">
-        <h2 class="section-title"><i class="fa-solid fa-trophy"></i> Hackathons</h2>
-        <div class="credentials-list" id="hackathons-list">
-          <!-- Dynamically Loaded from data.json -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="section contact" id="contact">
-    <h2 class="section-title text-center">Get In Touch</h2>
-
-    <div class="contact-grid">
-      <!-- Contact Info Card -->
-      <div class="card glass-card contact-info-card">
-        <h3 class="contact-subtitle"><i class="fa-solid fa-paper-plane"></i> Let's Connect</h3>
-        <p class="contact-text">
-          I am currently open to collaboration, open-source projects, and frontend AI engineering opportunities.
-          Drop me a message or connect via social links!
-        </p>
-
-        <div class="contact-buttons">
-          <a href="mailto:arunkumarmeda27@gmail.com" class="btn btn-primary btn-glow" id="contact-btn-email">
-            <i class="fa-solid fa-envelope"></i> Email Me
-          </a>
-          <a href="resume.pdf" target="_blank" class="btn btn-secondary" id="contact-btn-resume">
-            <i class="fa-solid fa-file-pdf"></i> Resume
-          </a>
-          <a href="https://www.linkedin.com/in/arun-kumar-meda-557b051b8" target="_blank" class="btn btn-secondary"
-            id="contact-btn-linkedin">
-            <i class="fa-brands fa-linkedin"></i> LinkedIn
-          </a>
-          <a href="https://github.com/arunkumarmeda27" target="_blank" class="btn btn-secondary"
-            id="contact-btn-github">
-            <i class="fa-brands fa-github"></i> GitHub
-          </a>
-        </div>
-
-        <div class="copy-email-section">
-          <button class="copy-btn" id="copy-email-btn" data-email="arunkumarmeda27@gmail.com">
-            Copy Email Address <i class="fa-regular fa-copy"></i>
-          </button>
-          <span class="tooltip" id="email-tooltip">Copied!</span>
-        </div>
-      </div>
-
-      <!-- IDE Code Editor Contact Form -->
-      <div class="card glass-card contact-editor-card">
-        <div class="editor-header">
-          <div class="editor-dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="editor-title"><i class="fa-solid fa-code"></i> contact_session.js</span>
-        </div>
-        <form class="contact-code-form" id="contact-form">
-          <div class="code-line"><span class="code-keyword">function</span> <span class="code-func">sendMessage</span>() {</div>
-          <div class="form-group code-indent">
-            <label for="sender-name"><span class="code-variable">const</span> <span class="code-prop">name</span> =</label>
-            <input type="text" id="sender-name" class="code-input" placeholder="'Your Name'" required>
-          </div>
-          <div class="form-group code-indent">
-            <label for="sender-email"><span class="code-variable">const</span> <span class="code-prop">email</span> =</label>
-            <input type="email" id="sender-email" class="code-input" placeholder="'your.email@example.com'" required>
-          </div>
-          <div class="form-group code-indent">
-            <label for="sender-message"><span class="code-variable">const</span> <span class="code-prop">message</span> =</label>
-            <textarea id="sender-message" class="code-input code-textarea" rows="3" placeholder="'Write your message here...'" required></textarea>
-          </div>
-          <div class="code-line"><span class="code-keyword">return</span> <span class="code-variable">transmission</span>;</div>
-          <div class="code-line">}</div>
-
-          <button type="submit" class="btn btn-primary btn-submit-code">
-            <i class="fa-solid fa-paper-plane"></i> Initiate Transmission
-          </button>
-          <div class="terminal-status" id="terminal-status"></div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
   <footer class="footer">
-    <p>&copy; 2026 Arun Kumar Meda. All rights reserved.</p>
+    <div class="container footer-content">
+      <div class="footer-left">
+        <span class="footer-logo">&lt;AKM.dev /&gt;</span>
+        <p class="footer-text">&copy; 2026 Arun Kumar Meda. Engineered with clean code &amp; Three.js.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://github.com/arunkumarmeda27" target="_blank" class="footer-icon" title="GitHub" aria-label="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/arun-kumar-meda-557b051b8" target="_blank" class="footer-icon" title="LinkedIn" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="mailto:arunkumarmeda27@gmail.com" class="footer-icon" title="Email" aria-label="Email">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a href="resume.pdf" target="_blank" class="footer-icon" title="Resume" aria-label="Resume">
+          <i class="fa-solid fa-file-pdf"></i>
+        </a>
+      </div>
+    </div>
   </footer>
 
-  <!-- Reusable Media Lightbox Modal (multi-page carousel) -->
+  <!-- ============================================================
+       MULTI-PAGE DOCUMENT LIGHTBOX MODAL
+       ============================================================ -->
   <div id="media-modal" class="media-modal" onclick="window.closeMediaModal()">
-    <span class="modal-close">&times;</span>
+    <span class="modal-close" aria-label="Close modal">&times;</span>
     <div class="modal-content-wrapper" onclick="event.stopPropagation()">
-      <!-- Prev / Next arrows -->
       <button class="modal-nav modal-prev" id="modal-prev" onclick="window.modalNav(-1)" aria-label="Previous page">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
@@ -601,10 +494,8 @@
         <i class="fa-solid fa-chevron-right"></i>
       </button>
 
-      <!-- Image display -->
-      <img class="modal-content" id="modal-img" alt="Document page">
+      <img class="modal-content" id="modal-img" alt="Document page" />
 
-      <!-- Caption + page counter -->
       <div class="modal-footer">
         <div id="modal-caption" class="modal-caption"></div>
         <div id="modal-page-counter" class="modal-page-counter"></div>
@@ -612,9 +503,10 @@
     </div>
   </div>
 
-  <!-- Custom JavaScript -->
-  <script src="data.js?v=1.0"></script>
-  <script src="app.js?v=2.0"></script>
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>
